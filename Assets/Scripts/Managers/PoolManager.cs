@@ -10,33 +10,17 @@ public class PoolManager : MonoBehaviour
 
     #region Serialized Variables
 
-    [SerializeField] private List<GameObject> enemyPrefabs;
-    [SerializeField] private GameObject gemPrefab;
-    [SerializeField] private GameObject moneyPrefab;
-    [SerializeField] private GameObject bossBombPrefab;
-    //[SerializeField] private List<GameObject> gunPrefabs;
-
-
-    [SerializeField] private List<GameObject> enemyPool;
-    [SerializeField] private List<GameObject> gemPool;
-    [SerializeField] private List<GameObject> moneyPool;
-    [SerializeField] private List<GameObject> bulletPool;
-    [SerializeField] private List<GameObject> bossBombPool;
-
-    //[SerializeField] private List<GameObject> pistolBulletPool;
-    //[SerializeField] private List<GameObject> shotgunBulletPool;
-    //[SerializeField] private List<GameObject> smgBulletPool;
-    //[SerializeField] private List<GameObject> assaultRiffleBulletPool;
-    //[SerializeField] private List<GameObject> rocketLauncherBulletPool;
-    //[SerializeField] private List<GameObject> minigunBulletPool;
+    [SerializeField] private List<GameObject> wallPrefabs;
 
 
 
-    [SerializeField] private int amountEnemyToPool = 25;
-    [SerializeField] private int amountGemToPool = 70;
-    [SerializeField] private int amountMoneyToPool = 100;
-    [SerializeField] private int amountBombToPool = 10;
-    //[SerializeField] private int amountPistolBulletToPool = 20, amountSMGBulletToPool = 25, amountShotgunBulletToPool = 20, amountAssaultRiffleBulletToPool = 30, amountRocketBulletToPool = 15, amountMinigunBulletToPool = 60;
+    [SerializeField] private List<GameObject> wallDarkPool;
+    [SerializeField] private List<GameObject> wallLightPool;
+
+
+
+    [SerializeField] private int amountWallToPool = 50;
+
 
 
     #endregion
@@ -51,11 +35,7 @@ public class PoolManager : MonoBehaviour
     private void Init()
     {
         _levelId = LevelSignals.Instance.onGetCurrentModdedLevel();
-        InitializeEnemyPool();
-        InitializeGemPool();
-        InitializeMoneyPool();
-        InitializeMBombPool();
-        //InitializeBulletPool();
+        InitializeWallPool();
     }
 
     
@@ -72,16 +52,13 @@ public class PoolManager : MonoBehaviour
 
     private void SubscribeEvents()
     {
-        PoolSignals.Instance.onGetEnemyFromPool += OnGetEnemy;
-        PoolSignals.Instance.onGetGemFromPool += OnGetGem;
-        PoolSignals.Instance.onGetMoneyFromPool += OnGetMoney;
-        PoolSignals.Instance.onGetBulletFromPool += OnGetBullet;
-        PoolSignals.Instance.onGetBombFromPool += OnGetBomb;
+        PoolSignals.Instance.onGetDarkWallFromPool += OnGetDarkWall;
+        PoolSignals.Instance.onGetLightWallFromPool += OnGetLightWall;
+
 
 
         PoolSignals.Instance.onGetPoolManagerObj += OnGetPoolManagerObj;
 
-        PoolSignals.Instance.onAddBulletToPool += OnAddBulletToPool;
 
         //PlayerSignals.Instance.onPlayerSelectGun += OnPlayerSelectGun;
 
@@ -89,15 +66,11 @@ public class PoolManager : MonoBehaviour
 
     private void UnsubscribeEvents()
     {
-        PoolSignals.Instance.onGetEnemyFromPool -= OnGetEnemy;
-        PoolSignals.Instance.onGetGemFromPool -= OnGetGem;
-        PoolSignals.Instance.onGetMoneyFromPool -= OnGetMoney;
-        PoolSignals.Instance.onGetBulletFromPool -= OnGetBullet;
-        PoolSignals.Instance.onGetBombFromPool -= OnGetBomb;
+        PoolSignals.Instance.onGetDarkWallFromPool -= OnGetDarkWall;
+        PoolSignals.Instance.onGetLightWallFromPool -= OnGetLightWall;
 
         PoolSignals.Instance.onGetPoolManagerObj -= OnGetPoolManagerObj;
 
-        PoolSignals.Instance.onAddBulletToPool -= OnAddBulletToPool;
 
         //PlayerSignals.Instance.onPlayerSelectGun -= OnPlayerSelectGun;
 
@@ -112,138 +85,56 @@ public class PoolManager : MonoBehaviour
     #endregion
 
 
-    private void InitializeEnemyPool()
-    {
-        enemyPool = new List<GameObject>();
-        GameObject tmp;
-        for (int i = 0; i < amountEnemyToPool; i++)
-        {
-            tmp = Instantiate(enemyPrefabs[Random.Range(0, enemyPrefabs.Count)], transform);
-            tmp.SetActive(false);
-            enemyPool.Add(tmp);
-        }
-    }
 
-    private void InitializeGemPool()
+    private void InitializeWallPool()
     {
-        gemPool = new List<GameObject>();
-        GameObject tmp;
-        for (int i = 0; i < amountGemToPool; i++)
+        wallDarkPool = new List<GameObject>();
+        wallLightPool = new List<GameObject>();
+        GameObject tmp, tmp1;
+        for (int i = 0; i < 25; i++)
         {
-            tmp = Instantiate(gemPrefab, transform);
-            tmp.SetActive(false);
-            gemPool.Add(tmp);
-        }
-    }
-    private void InitializeMoneyPool()
-    {
-        moneyPool = new List<GameObject>();
-        GameObject tmp;
-        for (int i = 0; i < amountMoneyToPool; i++)
-        {
-            tmp = Instantiate(moneyPrefab, transform);
-            tmp.SetActive(false);
-            moneyPool.Add(tmp);
-        }
-    }
+            tmp = Instantiate(wallPrefabs[0], transform);
+            tmp1 = Instantiate(wallPrefabs[1], transform);
 
-    private void InitializeMBombPool()
-    {
-        bossBombPool = new List<GameObject>();
-        GameObject tmp;
-        for (int i = 0; i < amountBombToPool; i++)
-        {
-            tmp = Instantiate(bossBombPrefab, transform);
-            tmp.SetActive(false);
-            bossBombPool.Add(tmp);
+            tmp.transform.position = new Vector3(0, 0, i*2);
+            wallLightPool.Add(tmp);
+            wallDarkPool.Add(tmp1);
         }
     }
-
 
   
-    public GameObject OnGetEnemy()
+    public GameObject OnGetDarkWall()
     {
-        for (int i = 0; i < amountEnemyToPool; i++)
+ 
+        for (int i = 0; i < amountWallToPool; i++)
         {
-            if (!enemyPool[i].activeInHierarchy)
+            if (!wallDarkPool[i].activeInHierarchy)
             {
-                return enemyPool[i];
+                return wallDarkPool[i];
+            }
+        }
+        return null;
+    }
+    public GameObject OnGetLightWall()
+    {
+
+        for (int i = 0; i < amountWallToPool; i++)
+        {
+            if (!wallLightPool[i].activeInHierarchy)
+            {
+                return wallLightPool[i];
             }
         }
         return null;
     }
 
-    public GameObject OnGetGem()
-    {
-        for (int i = 0; i < amountGemToPool; i++)
-        {
-            if (!gemPool[i].activeInHierarchy)
-            {
-                return gemPool[i];
-            }
-        }
-        return null;
-    }
-
-    public GameObject OnGetMoney()
-    {
-        for (int i = 0; i < amountMoneyToPool; i++)
-        {
-            if (!moneyPool[i].activeInHierarchy)
-            {
-                return moneyPool[i];
-            }
-        }
-        return null;
-    }
-
-    public GameObject OnGetBullet()
-    {
-        if (bulletPool.Count == 0)
-        {
-            return null;
-        }
-
-        for (int i = 0; i < bulletPool.Count; i++)
-        {
-            if (!bulletPool[i].activeInHierarchy)
-            {
-                return bulletPool[i];
-            }
-        }
-        return null;
-    }
-    public GameObject OnGetBomb()
-    {
-        for (int i = 0; i < amountBombToPool; i++)
-        {
-            if (!bossBombPool[i].activeInHierarchy)
-            {
-                return bossBombPool[i];
-            }
-        }
-        return null;
-    }
-
-    public void OnAddBulletToPool(GameObject bullet)//mermiler için pool, mevcut silahtan instantiate edilen mermilerin önce poola gelip, sonra hep pooldan kullanýlmasý þeklindedir. aksi halde her silah mermisi için pool oluþturmak gerekir.
-    {
-        bullet.transform.parent = transform;
-        bulletPool.Add(bullet);
-    }
+ 
 
     public Transform OnGetPoolManagerObj()
     {
         return transform;
     }
 
-    private void OnPlayerSelectGun(int tmep, SaveLoadStates saveType, SaveFiles saveFiles) //Silah deðiþtirince mevcut silahýn mermileri yok edilir.
-    {
-        foreach (var i in bulletPool)
-        {
-            Destroy(i);
-        }
-        bulletPool.Clear();
-    }
 
 
     private void OnReset()

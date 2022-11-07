@@ -91,6 +91,8 @@ namespace Managers
                 {
                     return;
                 }
+                InputSignals.Instance.onClicked?.Invoke(true);
+
                 //InputSignals.Instance.onInputDragged?.Invoke(new InputParams() //Joystick eklenince aç
                 //{
                 //    XValue = joystick.Horizontal,
@@ -101,11 +103,7 @@ namespace Managers
 
             if (Input.GetMouseButtonUp(0))
             {
-                InputSignals.Instance.onInputDragged?.Invoke(new InputParams()
-                {
-                    XValue = 0,
-                    ZValue = 0
-                });
+                InputSignals.Instance.onInputReleased?.Invoke(false);
             }
 
         }

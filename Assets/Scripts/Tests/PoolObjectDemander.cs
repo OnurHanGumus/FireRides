@@ -10,13 +10,13 @@ public class PoolObjectDemander : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        GameObject temp = PoolSignals.Instance.onGetMoneyFromPool?.Invoke();
+        //GameObject temp = PoolSignals.Instance.onGetMoneyFromPool?.Invoke();
         //if (temp == null)
         //{
         //    temp = Instantiate(/*moneyPrefab*/, transform.position, transform.rotation);
         //}
-        temp.SetActive(true);
-        temp.transform.position = new Vector3(0, 200, 0);
+        //temp.SetActive(true);
+        //temp.transform.position = new Vector3(0, 200, 0);
     }
 
 
