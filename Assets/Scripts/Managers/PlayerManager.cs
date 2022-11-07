@@ -18,13 +18,9 @@ namespace Managers
         #region Public Variables
         public bool IsPlayerDead = false;
 
-
-
         #endregion
 
         #region Serialized Variables
-
-
 
         #endregion
 
@@ -64,6 +60,10 @@ namespace Managers
 
             PlayerSignals.Instance.onGetPlayer += OnGetPlayer;
 
+            CoreGameSignals.Instance.onPlay += _movementController.OnPlay;
+            CoreGameSignals.Instance.onRestartLevel += _movementController.OnReset;
+            CoreGameSignals.Instance.onRestartLevel += OnResetLevel;
+
         }
 
         private void UnsubscribeEvents()
@@ -75,6 +75,9 @@ namespace Managers
 
             PlayerSignals.Instance.onGetPlayer -= OnGetPlayer;
 
+            CoreGameSignals.Instance.onPlay -= _movementController.OnPlay;
+            CoreGameSignals.Instance.onRestartLevel -= _movementController.OnReset;
+            CoreGameSignals.Instance.onRestartLevel -= OnResetLevel;
 
         }
 
@@ -92,6 +95,12 @@ namespace Managers
         private Transform OnGetPlayer()
         {
             return transform;
+        }
+
+        private void OnResetLevel()
+        {
+            transform.position = new Vector3(0, 0, 10);
+
         }
 
     }

@@ -58,10 +58,7 @@ public class PoolManager : MonoBehaviour
 
 
         PoolSignals.Instance.onGetPoolManagerObj += OnGetPoolManagerObj;
-
-
-        //PlayerSignals.Instance.onPlayerSelectGun += OnPlayerSelectGun;
-
+        CoreGameSignals.Instance.onRestartLevel += OnReset;
     }
 
     private void UnsubscribeEvents()
@@ -70,11 +67,7 @@ public class PoolManager : MonoBehaviour
         PoolSignals.Instance.onGetLightWallFromPool -= OnGetLightWall;
 
         PoolSignals.Instance.onGetPoolManagerObj -= OnGetPoolManagerObj;
-
-
-        //PlayerSignals.Instance.onPlayerSelectGun -= OnPlayerSelectGun;
-
-
+        CoreGameSignals.Instance.onRestartLevel -= OnReset;
     }
 
     private void OnDisable()
@@ -142,8 +135,14 @@ public class PoolManager : MonoBehaviour
 
 
     private void OnReset()
-    {
-        //reset
+    {  
+        for (int i = 0; i < 25; i++)
+        {
+            wallLightPool[i].transform.position = new Vector3(0, Random.Range(-4, 5), (2 * i + 1) * 2);
+            wallDarkPool[i].transform.position = new Vector3(0, Random.Range(-4, 5), (i * 4));
+            wallLightPool[i].SetActive(true);
+            wallDarkPool[i].SetActive(true);
+        }
     }
 
 

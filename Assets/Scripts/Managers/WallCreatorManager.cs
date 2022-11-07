@@ -29,7 +29,7 @@ namespace Managers
         #endregion
 
         #region Private Variables
-
+        private bool _isReset = false;
         #endregion
 
         #endregion
@@ -52,6 +52,8 @@ namespace Managers
         private void SubscribeEvents()
         {
             ScoreSignals.Instance.onScoreIncrease += OnScoreIncreased;
+            CoreGameSignals.Instance.onRestartLevel += OnReset;
+            CoreGameSignals.Instance.onPlay += OnPlay;
         }
 
 
@@ -59,6 +61,7 @@ namespace Managers
         private void UnsubscribeEvents()
         {
             ScoreSignals.Instance.onScoreIncrease -= OnScoreIncreased;
+            CoreGameSignals.Instance.onPlay -= OnPlay;
 
         }
 
@@ -71,6 +74,10 @@ namespace Managers
 
         private void OnScoreIncreased(ScoreTypeEnums type, int value)
         {
+            if (_isReset)
+            {
+                return;
+            }
             GameObject wall;
             if (colorTurn == 0)
             {
@@ -93,6 +100,16 @@ namespace Managers
             wall.SetActive(true);
             Debug.Log("taþýndý");
 
+        }
+
+        private void OnPlay()
+        {
+            _isReset = false;
+        }
+        private void OnReset()
+        {
+            _isReset = true;
+            lastWallZPos = 98;
         }
     }
 }

@@ -22,6 +22,7 @@ namespace Controllers
         private PlayerData _data;
 
         private bool _isClicked = false;
+        private bool _isNotStarted = true;
         private float a = 0;
 
         float maxStrength = 15;
@@ -45,6 +46,11 @@ namespace Controllers
 
         private void FixedUpdate()
         {
+            if (_isNotStarted)
+            {
+                return;
+            }
+
             if (_isClicked)
             {
                 _rig.velocity = new Vector3(0, Mathf.SmoothDamp(_rig.velocity.y, maxStrength, ref a , recoveryRate * Time.fixedDeltaTime), speed + 5);
@@ -67,6 +73,18 @@ namespace Controllers
         public float OnGetPlayerSpeed()
         {
             return _data.Speed;
+        }
+
+        public void OnPlay()
+        {
+            _isNotStarted = false;
+            _rig.useGravity = true;
+        }
+        public void OnReset()
+        {
+            _isNotStarted = true;
+            _rig.useGravity = false;
+            _rig.velocity = Vector3.zero;
         }
     }
 }
