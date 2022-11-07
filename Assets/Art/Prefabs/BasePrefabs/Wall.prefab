@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 782115864096770162}
   - component: {fileID: 782115864096770163}
   - component: {fileID: 782115864096770160}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Ceil
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -90,7 +90,7 @@ BoxCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 782115864096770161}
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
@@ -344,7 +344,7 @@ GameObject:
   - component: {fileID: 8598306216613462607}
   - component: {fileID: 5709842381027581407}
   - component: {fileID: 3527492775916884292}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Physics
   m_TagString: Untagged
   m_Icon: {fileID: 0}
