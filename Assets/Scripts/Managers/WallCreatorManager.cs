@@ -25,6 +25,7 @@ namespace Managers
         #region Serialized Variables
 
         [SerializeField] private int colorTurn = 0;
+        [SerializeField] private int lastWallZPos = 98;
         #endregion
 
         #region Private Variables
@@ -40,7 +41,7 @@ namespace Managers
 
         private void Awake()
         {
-            StartCoroutine(MoveForward());
+            //StartCoroutine(MoveForward());
         }
 
         private void OnEnable()
@@ -68,14 +69,6 @@ namespace Managers
 
         #endregion
 
-
-        private IEnumerator MoveForward()
-        {
-            yield return new WaitForSeconds(1f);
-            OnScoreIncreased(ScoreTypeEnums.Score, 2);
-            StartCoroutine(MoveForward());
-        }
-
         private void OnScoreIncreased(ScoreTypeEnums type, int value)
         {
             GameObject wall;
@@ -92,11 +85,14 @@ namespace Managers
             }
             if (wall == null)
             {
+                Debug.Log("nullmuþ");
                 return;
             }
+            lastWallZPos += 2;
+            wall.transform.position = new Vector3(0, UnityEngine.Random.Range(-4, 5), lastWallZPos);
             wall.SetActive(true);
-            wall.transform.position = new Vector3(0, UnityEngine.Random.Range(-4, 5), value * 2);
-            Debug.Log("ötelendi");
+            Debug.Log("taþýndý");
+
         }
     }
 }

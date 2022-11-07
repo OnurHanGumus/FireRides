@@ -6,7 +6,7 @@ using UnityEngine.UI;
 
 namespace Controllers
 {
-    public class LevelPanelController : MonoBehaviour //Gerek olmayabilir
+    public class LevelPanelControllerUnUsed : MonoBehaviour //Gerek olmayabilir
     {
         #region Self Variables
 

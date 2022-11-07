@@ -117,11 +117,18 @@ namespace Managers
                 SaveSignals.Instance.onSaveCollectables?.Invoke(_money, SaveLoadStates.Money, SaveFiles.SaveFile);
 
             }
-            else
+            else if(type.Equals(ScoreTypeEnums.Money))
             {
                 _gem += amount;
                 UISignals.Instance.onSetChangedText?.Invoke(type, _gem);
                 SaveSignals.Instance.onSaveCollectables?.Invoke(_gem, SaveLoadStates.Gem, SaveFiles.SaveFile);
+            }
+            else
+            {
+                _score += amount;
+                UISignals.Instance.onSetChangedText?.Invoke(type, _score);
+                SaveSignals.Instance.onSaveCollectables?.Invoke(_score, SaveLoadStates.Score, SaveFiles.SaveFile);
+
             }
         }
 

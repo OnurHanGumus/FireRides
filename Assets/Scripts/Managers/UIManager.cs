@@ -13,6 +13,7 @@ namespace Managers
 
         [SerializeField] private UIPanelActivenessController uiPanelController;
         [SerializeField] private GameOverPanelController gameOverPanelController;
+        [SerializeField] private LevelPanelController LevelPanelController;
 
         #endregion
 
@@ -29,9 +30,12 @@ namespace Managers
         {
             UISignals.Instance.onOpenPanel += OnOpenPanel;
             UISignals.Instance.onClosePanel += OnClosePanel;
+            UISignals.Instance.onSetChangedText += LevelPanelController.OnScoreUpdateText;
             CoreGameSignals.Instance.onPlay += OnPlay;
             CoreGameSignals.Instance.onLevelFailed += OnLevelFailed;
             CoreGameSignals.Instance.onLevelSuccessful += OnLevelSuccessful;
+            ScoreSignals.Instance.onScoreIncrease += LevelPanelController.OnScoreUpdateText;
+
         }
 
         private void UnsubscribeEvents()
@@ -39,8 +43,11 @@ namespace Managers
             UISignals.Instance.onOpenPanel -= OnOpenPanel;
             UISignals.Instance.onClosePanel -= OnClosePanel;
             CoreGameSignals.Instance.onPlay -= OnPlay;
+            UISignals.Instance.onSetChangedText -= LevelPanelController.OnScoreUpdateText;
             CoreGameSignals.Instance.onLevelFailed -= OnLevelFailed;
             CoreGameSignals.Instance.onLevelSuccessful -= OnLevelSuccessful;
+            ScoreSignals.Instance.onScoreIncrease -= LevelPanelController.OnScoreUpdateText;
+
         }
 
         private void OnDisable()
