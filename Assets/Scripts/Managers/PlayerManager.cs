@@ -62,6 +62,8 @@ namespace Managers
             InputSignals.Instance.onClicked += _movementController.OnClicked;
             InputSignals.Instance.onInputReleased += _movementController.OnReleased;
 
+            PlayerSignals.Instance.onGetPlayer += OnGetPlayer;
+
         }
 
         private void UnsubscribeEvents()
@@ -71,6 +73,7 @@ namespace Managers
             InputSignals.Instance.onInputReleased -= _movementController.OnReleased;
 
 
+            PlayerSignals.Instance.onGetPlayer -= OnGetPlayer;
 
 
         }

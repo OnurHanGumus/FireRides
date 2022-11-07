@@ -7,7 +7,16 @@ using Signals;
 
 public class PoolObjectDemander : MonoBehaviour
 {
-    // Start is called before the first frame update
+    #region Self Variables
+
+    #region Serialized Variables
+
+
+    #endregion
+    #region Private Variables
+    #endregion
+    #endregion
+
     void Start()
     {
         //GameObject temp = PoolSignals.Instance.onGetMoneyFromPool?.Invoke();
@@ -18,6 +27,8 @@ public class PoolObjectDemander : MonoBehaviour
         //temp.SetActive(true);
         //temp.transform.position = new Vector3(0, 200, 0);
     }
+
+
 
 
 }

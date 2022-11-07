@@ -24,7 +24,6 @@ namespace Controllers
         private bool _isClicked = false;
         private float a = 0;
 
-        float currStrength;
         float maxStrength = 15;
         float recoveryRate = 25f;
 
@@ -48,14 +47,11 @@ namespace Controllers
         {
             if (_isClicked)
             {
-                _rig.velocity = new Vector3(0, Mathf.SmoothDamp(_rig.velocity.y, maxStrength, ref a , recoveryRate * Time.fixedDeltaTime), speed + 3);
-                Debug.Log(Mathf.SmoothDamp(_rig.velocity.y, maxStrength, ref a, recoveryRate * Time.fixedDeltaTime));
-
+                _rig.velocity = new Vector3(0, Mathf.SmoothDamp(_rig.velocity.y, maxStrength, ref a , recoveryRate * Time.fixedDeltaTime), speed + 5);
             }
             else
             {
                 _rig.velocity = new Vector3(0, _rig.velocity.y, speed);
-
             }
         }
 

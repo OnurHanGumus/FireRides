@@ -6,6 +6,7 @@ namespace Enums
     public enum ScoreTypeEnums
     {
         Money,
-        Gem
+        Gem,
+        Score,
     }
 }

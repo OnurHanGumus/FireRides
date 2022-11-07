@@ -96,7 +96,7 @@ public class PoolManager : MonoBehaviour
             tmp = Instantiate(wallPrefabs[0], transform);
             tmp1 = Instantiate(wallPrefabs[1], transform);
 
-            tmp.transform.position = new Vector3(0, 0, i*2);
+            tmp.transform.position = new Vector3(0, Random.Range(-4,5), i * 2); ;
             wallLightPool.Add(tmp);
             wallDarkPool.Add(tmp1);
         }
