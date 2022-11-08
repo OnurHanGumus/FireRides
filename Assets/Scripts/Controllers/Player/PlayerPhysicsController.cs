@@ -38,6 +38,10 @@ namespace Controllers
             {
                 CoreGameSignals.Instance.onLevelFailed?.Invoke();
             }
+            else if (other.CompareTag("NextLevel"))
+            {
+                CoreGameSignals.Instance.onNextLevel?.Invoke();
+            }
         }
 
         public void OnPlay()

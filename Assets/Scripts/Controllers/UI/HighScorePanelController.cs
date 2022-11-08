@@ -20,7 +20,7 @@ public class HighScorePanelController : MonoBehaviour
         UpdateText();
     }
 
-    private void UpdateText()
+    public void UpdateText()
     {
         int score = SaveSignals.Instance.onGetScore(SaveLoadStates.Score,SaveFiles.SaveFile);
         highScoreTxt.text = "High Score: " + score.ToString();

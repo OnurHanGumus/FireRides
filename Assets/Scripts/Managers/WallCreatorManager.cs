@@ -31,6 +31,7 @@ namespace Managers
         #region Private Variables
         private bool _isReset = false;
         private WallData _data;
+        private int _defaultStartPos = 0;
         #endregion
 
         #endregion
@@ -42,7 +43,14 @@ namespace Managers
 
         private void Awake()
         {
+            Init();
+        }
+
+        private void Init()
+        {
             _data = GetData();
+            lastWallZPos = (((PoolSignals.Instance.onGetAmount()-1)*2+1)*2);
+            _defaultStartPos = lastWallZPos;
         }
 
         private void OnEnable()
@@ -110,7 +118,7 @@ namespace Managers
         private void OnReset()
         {
             _isReset = true;
-            lastWallZPos = 98;
+            lastWallZPos = _defaultStartPos;
         }
     }
 }

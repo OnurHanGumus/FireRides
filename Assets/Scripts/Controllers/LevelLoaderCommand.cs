@@ -4,9 +4,9 @@ namespace Controllers
 {
     public class LevelLoaderCommand : MonoBehaviour
     {
-        public void InitializeLevel(GameObject gameObject, Transform levelHolder)
+        public void InitializeLevel(GameObject gameObject, Transform levelHolder, int level)
         {
-            Instantiate(gameObject, levelHolder);
+            Instantiate(gameObject, new Vector3(0,0, level * 68), Quaternion.identity, levelHolder);
         }
     }
 }

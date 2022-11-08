@@ -13,7 +13,8 @@ namespace Managers
 
         [SerializeField] private UIPanelActivenessController uiPanelController;
         [SerializeField] private GameOverPanelController gameOverPanelController;
-        [SerializeField] private LevelPanelController LevelPanelController;
+        [SerializeField] private LevelPanelController levelPanelController;
+        [SerializeField] private HighScorePanelController highScorePanelController;
 
         #endregion
 
@@ -30,11 +31,12 @@ namespace Managers
         {
             UISignals.Instance.onOpenPanel += OnOpenPanel;
             UISignals.Instance.onClosePanel += OnClosePanel;
-            UISignals.Instance.onSetChangedText += LevelPanelController.OnScoreUpdateText;
+            UISignals.Instance.onSetChangedText += levelPanelController.OnScoreUpdateText;
             CoreGameSignals.Instance.onPlay += OnPlay;
             CoreGameSignals.Instance.onLevelFailed += OnLevelFailed;
             CoreGameSignals.Instance.onLevelSuccessful += OnLevelSuccessful;
-            ScoreSignals.Instance.onScoreIncrease += LevelPanelController.OnScoreUpdateText;
+            ScoreSignals.Instance.onScoreIncrease += levelPanelController.OnScoreUpdateText;
+            ScoreSignals.Instance.onHighScore += highScorePanelController.UpdateText;
 
         }
 
@@ -43,10 +45,11 @@ namespace Managers
             UISignals.Instance.onOpenPanel -= OnOpenPanel;
             UISignals.Instance.onClosePanel -= OnClosePanel;
             CoreGameSignals.Instance.onPlay -= OnPlay;
-            UISignals.Instance.onSetChangedText -= LevelPanelController.OnScoreUpdateText;
+            UISignals.Instance.onSetChangedText -= levelPanelController.OnScoreUpdateText;
             CoreGameSignals.Instance.onLevelFailed -= OnLevelFailed;
             CoreGameSignals.Instance.onLevelSuccessful -= OnLevelSuccessful;
-            ScoreSignals.Instance.onScoreIncrease -= LevelPanelController.OnScoreUpdateText;
+            ScoreSignals.Instance.onScoreIncrease -= levelPanelController.OnScoreUpdateText;
+            ScoreSignals.Instance.onHighScore -= highScorePanelController.UpdateText;
 
         }
 

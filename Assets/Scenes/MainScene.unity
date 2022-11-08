@@ -499,7 +499,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   uiPanelController: {fileID: 97251330}
   gameOverPanelController: {fileID: 1994952899310297995}
-  LevelPanelController: {fileID: 1589092165}
+  levelPanelController: {fileID: 1589092165}
+  highScorePanelController: {fileID: 6962386289050533000}
 --- !u!1 &104751525
 GameObject:
   m_ObjectHideFlags: 0
@@ -2136,7 +2137,7 @@ MonoBehaviour:
   - {fileID: 5616346699358648838, guid: d9dc8e7ef33dc6545a22512e7ce6b9be, type: 3}
   wallDarkPool: []
   wallLightPool: []
-  amountWallToPool: 25
+  amountWallToPool: 55
 --- !u!1 &749374685
 GameObject:
   m_ObjectHideFlags: 0
@@ -3768,7 +3769,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   colorTurn: 0
-  lastWallZPos: 98
+  lastWallZPos: 218
 --- !u!1 &1700167665
 GameObject:
   m_ObjectHideFlags: 0

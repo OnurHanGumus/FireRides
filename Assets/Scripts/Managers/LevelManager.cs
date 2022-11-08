@@ -38,13 +38,7 @@ namespace Managers
 
         private void Awake()
         {
-            _levelID = GetActiveLevel();
-        }
-
-        private int GetActiveLevel()
-        {
-            if (!ES3.FileExists()) return 0;
-            return ES3.KeyExists("Level") ? ES3.Load<int>("Level") : 0;
+            //_levelID = GetActiveLevel();
         }
 
 
@@ -93,17 +87,13 @@ namespace Managers
         {
             _levelID++;
             CoreGameSignals.Instance.onClearActiveLevel?.Invoke();
-            CoreGameSignals.Instance.onReset?.Invoke();
-            CoreGameSignals.Instance.onSaveAndResetGameData?.Invoke();
             CoreGameSignals.Instance.onLevelInitialize?.Invoke();
+
         }
 
         private void OnRestartLevel()
         {
             CoreGameSignals.Instance.onClearActiveLevel?.Invoke();
-            CoreGameSignals.Instance.onReset?.Invoke();
-            CoreGameSignals.Instance.onSaveAndResetGameData?.Invoke();
-            CoreGameSignals.Instance.onLevelInitialize?.Invoke();
         }
 
         private int OnGetLevelID()
@@ -116,7 +106,7 @@ namespace Managers
         {
             UnityEngine.Object[] Levels = Resources.LoadAll("Levels");
             int newLevelId = _levelID % Levels.Length;
-            levelLoader.InitializeLevel((GameObject)Levels[newLevelId], levelHolder.transform);
+            levelLoader.InitializeLevel((GameObject)Levels[newLevelId], levelHolder.transform, _levelID);
         }
 
         private void OnClearActiveLevel()

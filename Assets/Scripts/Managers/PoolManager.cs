@@ -65,6 +65,7 @@ public class PoolManager : MonoBehaviour
 
 
         PoolSignals.Instance.onGetPoolManagerObj += OnGetPoolManagerObj;
+        PoolSignals.Instance.onGetAmount += OnGetAmount;
         CoreGameSignals.Instance.onRestartLevel += OnReset;
     }
 
@@ -74,6 +75,7 @@ public class PoolManager : MonoBehaviour
         PoolSignals.Instance.onGetLightWallFromPool -= OnGetLightWall;
 
         PoolSignals.Instance.onGetPoolManagerObj -= OnGetPoolManagerObj;
+        PoolSignals.Instance.onGetAmount -= OnGetAmount;
         CoreGameSignals.Instance.onRestartLevel -= OnReset;
     }
 
@@ -91,7 +93,7 @@ public class PoolManager : MonoBehaviour
         wallDarkPool = new List<GameObject>();
         wallLightPool = new List<GameObject>();
         GameObject tmp, tmp1;
-        for (int i = 0; i < 25; i++)
+        for (int i = 0; i < amountWallToPool; i++)
         {
             tmp = Instantiate(wallPrefabs[0], transform);
             tmp1 = Instantiate(wallPrefabs[1], transform);
@@ -139,11 +141,16 @@ public class PoolManager : MonoBehaviour
         return transform;
     }
 
+    public int OnGetAmount()
+    {
+        return amountWallToPool;
+    }
+
 
 
     private void OnReset()
     {  
-        for (int i = 0; i < 25; i++)
+        for (int i = 0; i < amountWallToPool; i++)
         {
             wallLightPool[i].transform.position = new Vector3(0, Random.Range(_data.Y_MinRandomPos, _data.Y_MaxRandomPos), (2 * i + 1) * 2);
             wallDarkPool[i].transform.position = new Vector3(0, Random.Range(_data.Y_MinRandomPos, _data.Y_MaxRandomPos), (i * 4));

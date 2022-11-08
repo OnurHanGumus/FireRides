@@ -14,7 +14,7 @@ namespace Signals
 
         public Func<Transform> onGetPoolManagerObj = delegate { return null; };
 
-        public UnityAction<GameObject> onAddBulletToPool = delegate { };
+        public Func<int> onGetAmount = delegate { return 0; };
 
 
     }

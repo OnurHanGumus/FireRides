@@ -15,6 +15,7 @@ namespace Signals
         public UnityAction<ScoreTypeEnums, int> onScoreDecrease = delegate { };
 
 
+        public UnityAction onHighScore = delegate { };
 
     }
 }
