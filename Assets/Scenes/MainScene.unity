@@ -2137,7 +2137,7 @@ MonoBehaviour:
   - {fileID: 5616346699358648838, guid: d9dc8e7ef33dc6545a22512e7ce6b9be, type: 3}
   wallDarkPool: []
   wallLightPool: []
-  amountWallToPool: 55
+  amountWallToPool: 45
 --- !u!1 &749374685
 GameObject:
   m_ObjectHideFlags: 0

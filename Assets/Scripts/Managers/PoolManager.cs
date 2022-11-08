@@ -149,7 +149,7 @@ public class PoolManager : MonoBehaviour
 
 
     private void OnReset()
-    {  
+    {
         for (int i = 0; i < amountWallToPool; i++)
         {
             wallLightPool[i].transform.position = new Vector3(0, Random.Range(_data.Y_MinRandomPos, _data.Y_MaxRandomPos), (2 * i + 1) * 2);
@@ -157,7 +157,7 @@ public class PoolManager : MonoBehaviour
             wallLightPool[i].SetActive(true);
             wallDarkPool[i].SetActive(true);
         }
+
+        PoolSignals.Instance.onPoolReseted?.Invoke();
     }
-
-
 }

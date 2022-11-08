@@ -16,6 +16,7 @@ namespace Signals
 
         public Func<int> onGetAmount = delegate { return 0; };
 
+        public UnityAction onPoolReseted = delegate { };
 
     }
 }
