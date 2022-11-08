@@ -148,52 +148,15 @@ namespace Managers
             _saveGameCommand.OnSaveData(SaveLoadStates.Money, _loadGameCommand.OnLoadGameData(SaveLoadStates.Money));
             _saveGameCommand.OnSaveData(SaveLoadStates.Gem, _loadGameCommand.OnLoadGameData(SaveLoadStates.Gem));
 
-            //_saveGameCommand.OnResetList(SaveLoadStates.CurrentLevelOpenedAreas);
-            //_saveGameCommand.OnResetList(SaveLoadStates.OpenedTurrets, SaveFiles.WorkerCurrentCounts.ToString());
-            //_saveGameCommand.OnResetList(SaveLoadStates.OpenedTurretOwners, SaveFiles.WorkerCurrentCounts.ToString());
-
-            //_saveGameCommand.OnResetArray(SaveLoadStates.OpenedAreasCounts, SaveFiles.WorkerCurrentCounts.ToString());
-            //_saveGameCommand.OnResetArray(SaveLoadStates.OpenedTurretsCounts, SaveFiles.WorkerCurrentCounts.ToString());
-            //_saveGameCommand.OnResetArray(SaveLoadStates.OpenedTurretOwnersCounts, SaveFiles.WorkerCurrentCounts.ToString());
-            //_saveGameCommand.OnResetArray(SaveLoadStates.OpenedEnemyAreaCounts, SaveFiles.WorkerCurrentCounts.ToString());
-
-            //_saveGameCommand.OnResetArray(SaveLoadStates.AmmoWorkerAreaCounts, SaveFiles.WorkerCurrentCounts.ToString());
-            //_saveGameCommand.OnResetArray(SaveLoadStates.MoneyWorkerAreaCounts, SaveFiles.WorkerCurrentCounts.ToString());
-
-            //_saveGameCommand.OnSaveData(SaveLoadStates.MinerCount, 0, SaveFiles.WorkerCurrentCounts.ToString());
-            //_saveGameCommand.OnSaveData(SaveLoadStates.SoldierCount, 0, SaveFiles.WorkerCurrentCounts.ToString());
-            //_saveGameCommand.OnSaveData(SaveLoadStates.BossHealth, 0, SaveFiles.SaveFile.ToString());
         }
 
-        //private void SetNewSaveAreaValue(SaveLoadStates type, int[] newArray) //Areadan çýkýnca mevcut satýn alma durumunu kaydeder
-        //{
-        //    _saveGameCommand.OnSaveArray(type, newArray, SaveFiles.WorkerCurrentCounts.ToString());
-        //}
+
         private void SendCollectablesInformation() //Essential
         {
             SaveSignals.Instance.onInitializeSetMoney?.Invoke(_loadGameCommand.OnLoadGameData(SaveLoadStates.Money));
             SaveSignals.Instance.onInitializeSetGem?.Invoke(_loadGameCommand.OnLoadGameData(SaveLoadStates.Gem));
         }
-        //private void SendPlayerUpgradesInformation()
-        //{
-        //    List<int> temp = _loadGameCommand.OnLoadList(SaveLoadStates.PlayerUpgrades, SaveFiles.PlayerImprovements.ToString());
-        //    SaveSignals.Instance.onInitializePlayerUpgrades?.Invoke(temp, SaveLoadStates.PlayerUpgrades, SaveFiles.PlayerImprovements);
-        //}
-        //private void SendWorkerUpgradesInformation()
-        //{
-        //    List<int> temp = _loadGameCommand.OnLoadList(SaveLoadStates.WorkerUpgrades, SaveFiles.WorkerUpgrades.ToString());
 
-        //    SaveSignals.Instance.onInitializeWorkerUpgrades?.Invoke(temp);
-        //}
-        //private void SendGunLevelsInformation()
-        //{
-        //    UISignals.Instance.onInitializeGunLevels?.Invoke(_loadGameCommand.OnLoadList(SaveLoadStates.GunLevels, SaveFiles.Guns.ToString()),SaveLoadStates.GunLevels, SaveFiles.Guns);
-        //}
-
-        //private void SendSelectedGunIdInformation()
-        //{
-        //    SaveSignals.Instance.onInitializeSelectedGunId?.Invoke(_loadGameCommand.OnLoadGameData(SaveLoadStates.GunId, SaveFiles.Guns.ToString()),SaveLoadStates.GunId, SaveFiles.Guns);
-        //}
         private int OnGetData(SaveLoadStates state, SaveFiles file)
         {
             return _loadGameCommand.OnLoadGameData(state, file.ToString());
@@ -204,16 +167,7 @@ namespace Managers
         {
             return _loadGameCommand.OnLoadList(SaveLoadStates.GunLevels, SaveFiles.Guns.ToString());
         }
-        private List<int> OnGetOpenedTurrets()
-        {
-            return _loadGameCommand.OnLoadList(SaveLoadStates.OpenedTurrets, SaveFiles.WorkerCurrentCounts.ToString());
 
-        }
-        private List<int> OnGetWorkerUpgrades()
-        {
-            return _loadGameCommand.OnLoadList(SaveLoadStates.WorkerUpgrades, SaveFiles.WorkerUpgrades.ToString());
-
-        }
 
         private int[] OnGetAreaCounts(SaveLoadStates saveType)
         {

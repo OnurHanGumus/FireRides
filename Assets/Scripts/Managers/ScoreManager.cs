@@ -30,6 +30,7 @@ namespace Managers
         #region Private Variables
         private int _money = 0;
         private int _gem = 0;
+        private int _score = 0;
 
         [ShowInInspector]
         public int Money
@@ -48,7 +49,6 @@ namespace Managers
             set { _gem = value; }
         }
 
-        private int _score;
         [ShowInInspector]
         public int Score
         {
@@ -86,6 +86,9 @@ namespace Managers
 
             SaveSignals.Instance.onInitializeSetMoney += OnInitializeSetMoney;
             SaveSignals.Instance.onInitializeSetGem += OnInitializeSetGem;
+
+            CoreGameSignals.Instance.onPlay += OnPlay;
+            CoreGameSignals.Instance.onRestartLevel += OnReset;
         }
 
         private void UnsubscribeEvents()
@@ -98,6 +101,9 @@ namespace Managers
 
             SaveSignals.Instance.onInitializeSetMoney -= OnInitializeSetMoney;
             SaveSignals.Instance.onInitializeSetGem -= OnInitializeSetGem;
+
+            CoreGameSignals.Instance.onPlay -= OnPlay;
+            CoreGameSignals.Instance.onRestartLevel -= OnReset;
 
         }
 
@@ -127,8 +133,6 @@ namespace Managers
             {
                 _score += amount;
                 UISignals.Instance.onSetChangedText?.Invoke(type, _score);
-                SaveSignals.Instance.onSaveCollectables?.Invoke(_score, SaveLoadStates.Score, SaveFiles.SaveFile);
-
             }
         }
 
@@ -175,6 +179,19 @@ namespace Managers
         {
             Gem = amount;
             UISignals.Instance.onSetChangedText?.Invoke(ScoreTypeEnums.Gem, _gem);
+
+        }
+
+        private void OnPlay()
+        {
+            Score = 0;
+            UISignals.Instance.onSetChangedText?.Invoke(ScoreTypeEnums.Score, Score);
+
+        }
+        private void OnReset()
+        {
+            Score = 0;
+            UISignals.Instance.onSetChangedText?.Invoke(ScoreTypeEnums.Score, Score);
 
         }
     }

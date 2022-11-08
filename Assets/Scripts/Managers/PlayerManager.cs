@@ -43,8 +43,7 @@ namespace Managers
             _data = GetData();
             _movementController = GetComponent<PlayerMovementController>();
         }
-        private PlayerData GetData() => Resources.Load<CD_Player>("Data/CD_Player").Data;
-
+        public PlayerData GetData() => Resources.Load<CD_Player>("Data/CD_Player").Data;
 
         #region Event Subscription
 
@@ -61,6 +60,7 @@ namespace Managers
             PlayerSignals.Instance.onGetPlayer += OnGetPlayer;
 
             CoreGameSignals.Instance.onPlay += _movementController.OnPlay;
+            CoreGameSignals.Instance.onLevelFailed += _movementController.OnPlayerDie;
             CoreGameSignals.Instance.onRestartLevel += _movementController.OnReset;
             CoreGameSignals.Instance.onRestartLevel += OnResetLevel;
 
@@ -76,15 +76,13 @@ namespace Managers
             PlayerSignals.Instance.onGetPlayer -= OnGetPlayer;
 
             CoreGameSignals.Instance.onPlay -= _movementController.OnPlay;
+            CoreGameSignals.Instance.onLevelFailed -= _movementController.OnPlayerDie;
             CoreGameSignals.Instance.onRestartLevel -= _movementController.OnReset;
             CoreGameSignals.Instance.onRestartLevel -= OnResetLevel;
 
         }
 
-        public PlayerData GetPlayerData()
-        {
-            return _data;
-        }
+
         private void OnDisable()
         {
             UnsubscribeEvents();
