@@ -12,13 +12,11 @@ namespace Controllers
         #region Self Variables
 
         #region Serialized Variables
-        [SerializeField] private float speed = 2;
         #endregion
 
         #region Private Variables
         private Rigidbody _rig;
         private PlayerManager _manager;
-        private float _xValue = 2, _zValue;
         private PlayerData _data;
 
         private bool _isClicked = false;
@@ -53,11 +51,11 @@ namespace Controllers
 
             if (_isClicked)
             {
-                _rig.velocity = new Vector3(0, Mathf.SmoothDamp(_rig.velocity.y, maxStrength, ref a , recoveryRate * Time.fixedDeltaTime), speed + 5);
+                _rig.velocity = new Vector3(0, Mathf.SmoothDamp(_rig.velocity.y, maxStrength, ref a , recoveryRate * Time.fixedDeltaTime), _data.Speed + _data.IncreasedSpeed);
             }
             else
             {
-                _rig.velocity = new Vector3(0, _rig.velocity.y, speed);
+                _rig.velocity = new Vector3(0, _rig.velocity.y, _data.Speed);
             }
         }
 
