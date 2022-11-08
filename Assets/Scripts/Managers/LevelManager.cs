@@ -56,6 +56,7 @@ namespace Managers
             CoreGameSignals.Instance.onNextLevel += OnNextLevel;
             CoreGameSignals.Instance.onRestartLevel += OnRestartLevel;
             CoreGameSignals.Instance.onGetLevelID += OnGetLevelID;
+            CoreGameSignals.Instance.onLevelFailed += OnPlayerDie; 
 
         }
 
@@ -68,6 +69,7 @@ namespace Managers
             CoreGameSignals.Instance.onNextLevel -= OnNextLevel;
             CoreGameSignals.Instance.onRestartLevel -= OnRestartLevel;
             CoreGameSignals.Instance.onGetLevelID -= OnGetLevelID;
+            CoreGameSignals.Instance.onLevelFailed -= OnPlayerDie;
 
         }
 
@@ -94,6 +96,7 @@ namespace Managers
         private void OnRestartLevel()
         {
             CoreGameSignals.Instance.onClearActiveLevel?.Invoke();
+            CoreGameSignals.Instance.onLevelInitialize?.Invoke();
         }
 
         private int OnGetLevelID()
@@ -112,6 +115,11 @@ namespace Managers
         private void OnClearActiveLevel()
         {
             levelClearer.ClearActiveLevel(levelHolder.transform);
+        }
+
+        private void OnPlayerDie()
+        {
+            _levelID = 0;
         }
     }
 }
