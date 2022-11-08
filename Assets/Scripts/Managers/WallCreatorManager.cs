@@ -30,18 +30,19 @@ namespace Managers
 
         #region Private Variables
         private bool _isReset = false;
+        private WallData _data;
         #endregion
 
         #endregion
 
-
+        private WallData GetData() => Resources.Load<CD_Wall>("Data/CD_Wall").wallData;
 
 
         #region Event Subscription
 
         private void Awake()
         {
-            //StartCoroutine(MoveForward());
+            _data = GetData();
         }
 
         private void OnEnable()
@@ -96,7 +97,7 @@ namespace Managers
                 return;
             }
             lastWallZPos += 2;
-            wall.transform.position = new Vector3(0, UnityEngine.Random.Range(-2, 3), lastWallZPos);
+            wall.transform.position = new Vector3(0, UnityEngine.Random.Range(_data.Y_MinRandomPos, _data.Y_MaxRandomPos), lastWallZPos);
             wall.SetActive(true);
             Debug.Log("taþýndý");
 

@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using Signals;
 using Enums;
+using Data.ValueObject;
+using Data.UnityObject;
 
 public class PoolManager : MonoBehaviour
 {
@@ -26,19 +28,24 @@ public class PoolManager : MonoBehaviour
     #endregion
     #region Private Variables
     private int _levelId = 0;
+    private WallData _data;
     #endregion
     #endregion
+    private WallData GetData() => Resources.Load<CD_Wall>("Data/CD_Wall").wallData;
+
     private void Awake()
     {
         Init();
+
     }
     private void Init()
     {
         _levelId = LevelSignals.Instance.onGetCurrentModdedLevel();
+        _data = GetData();
         InitializeWallPool();
     }
 
-    
+
 
     #region Event Subscriptions
     void Start()
@@ -89,10 +96,10 @@ public class PoolManager : MonoBehaviour
             tmp = Instantiate(wallPrefabs[0], transform);
             tmp1 = Instantiate(wallPrefabs[1], transform);
 
-            tmp.transform.position = new Vector3(0, Random.Range(-2, 3), (2*i+1)*2);
+            tmp.transform.position = new Vector3(0, Random.Range(_data.Y_MinRandomPos, _data.Y_MaxRandomPos), (2*i+1)*2);
 
 
-            tmp1.transform.position = new Vector3(0, Random.Range(-2, 3), (i * 4));
+            tmp1.transform.position = new Vector3(0, Random.Range(_data.Y_MinRandomPos, _data.Y_MaxRandomPos), (i * 4));
 
             wallLightPool.Add(tmp);
             wallDarkPool.Add(tmp1);
@@ -138,8 +145,8 @@ public class PoolManager : MonoBehaviour
     {  
         for (int i = 0; i < 25; i++)
         {
-            wallLightPool[i].transform.position = new Vector3(0, Random.Range(-4, 5), (2 * i + 1) * 2);
-            wallDarkPool[i].transform.position = new Vector3(0, Random.Range(-4, 5), (i * 4));
+            wallLightPool[i].transform.position = new Vector3(0, Random.Range(_data.Y_MinRandomPos, _data.Y_MaxRandomPos), (2 * i + 1) * 2);
+            wallDarkPool[i].transform.position = new Vector3(0, Random.Range(_data.Y_MinRandomPos, _data.Y_MaxRandomPos), (i * 4));
             wallLightPool[i].SetActive(true);
             wallDarkPool[i].SetActive(true);
         }

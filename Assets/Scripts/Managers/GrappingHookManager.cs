@@ -105,7 +105,7 @@ public class GrappingHookManager: MonoBehaviour
         {
             return;
         }
-        currentGrapplePosition = Vector3.Lerp(currentGrapplePosition, GrapplePoint, Time.deltaTime * 8f);
+        currentGrapplePosition = Vector3.Lerp(currentGrapplePosition, GrapplePoint, Time.deltaTime * 20f);
 
         lr.SetPosition(0, gunTip.position);
         lr.SetPosition(1, currentGrapplePosition);
