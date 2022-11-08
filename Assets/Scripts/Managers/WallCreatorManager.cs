@@ -96,7 +96,7 @@ namespace Managers
                 return;
             }
             lastWallZPos += 2;
-            wall.transform.position = new Vector3(0, UnityEngine.Random.Range(-4, 5), lastWallZPos);
+            wall.transform.position = new Vector3(0, UnityEngine.Random.Range(-2, 3), lastWallZPos);
             wall.SetActive(true);
             Debug.Log("taþýndý");
 
