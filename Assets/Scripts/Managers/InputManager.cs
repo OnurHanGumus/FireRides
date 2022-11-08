@@ -85,11 +85,7 @@ namespace Managers
 
         private void Update()
         {
-            if (IsPointerOverUIElement())
-            {
-                return;
-            }
-            if (Input.GetMouseButtonDown(0))
+            if (Input.GetMouseButtonDown(0) && !IsPointerOverUIElement())
             {
                 if (_isPlayerDead)
                 {
