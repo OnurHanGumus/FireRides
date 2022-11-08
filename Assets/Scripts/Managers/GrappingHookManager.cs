@@ -1,6 +1,9 @@
 using UnityEngine;
 using Signals;
 using Enums;
+using Data.UnityObject;
+using Data.ValueObject;
+using System;
 
 public class GrappingHookManager: MonoBehaviour
 {
@@ -24,6 +27,7 @@ public class GrappingHookManager: MonoBehaviour
     private float maxDistance = 1000f;
     private SpringJoint joint;
     private bool _isGrapping = false;
+    private GraplingData _data;
     #endregion
 
     #endregion
@@ -59,9 +63,17 @@ public class GrappingHookManager: MonoBehaviour
 
     void Awake()
     {
-        lr = GetComponent<LineRenderer>();
+        Init();
         StopGrapple();
     }
+
+    private void Init()
+    {
+        lr = GetComponent<LineRenderer>();
+        _data = GetData();
+
+    }
+    private GraplingData GetData() => Resources.Load<CD_Grapling>("Data/CD_Grapling").GraplingData;
 
 
     //Called after Update
@@ -105,7 +117,7 @@ public class GrappingHookManager: MonoBehaviour
         {
             return;
         }
-        currentGrapplePosition = Vector3.Lerp(currentGrapplePosition, GrapplePoint, Time.deltaTime * 20f);
+        currentGrapplePosition = Vector3.Lerp(currentGrapplePosition, GrapplePoint, Time.deltaTime * _data.Speed);
 
         lr.SetPosition(0, gunTip.position);
         lr.SetPosition(1, currentGrapplePosition);
