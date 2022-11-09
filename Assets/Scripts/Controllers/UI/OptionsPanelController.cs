@@ -13,7 +13,7 @@ public class OptionsPanelController : MonoBehaviour
     #endregion
     #region SerializeField Variables
     [SerializeField] private Toggle soundToggle;
-    [SerializeField] private AudioSource audioSource;
+    [SerializeField] private List<AudioSource> audioSource;
     #endregion
     #region Private Variables
     private bool _audioSourceActiveness;
@@ -39,7 +39,10 @@ public class OptionsPanelController : MonoBehaviour
     }
     private void EnableAudioSource()
     {
-        audioSource.enabled = _audioSourceActiveness;
+        foreach (var i in audioSource)
+        {
+           i.enabled = _audioSourceActiveness;
+        }
     }
 
 
