@@ -8,5 +8,6 @@ namespace Enums
         Rope,
         Breake,
         Sonme,
+        Click,
     }
 }

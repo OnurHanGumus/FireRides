@@ -56,6 +56,11 @@ namespace Managers
             }
         }
 
+        public void ButtonClickSound()
+        {
+            OnPlaySound(SoundEnums.Click);
+        }
+
         private void OnLevelFailed()
         {
 
