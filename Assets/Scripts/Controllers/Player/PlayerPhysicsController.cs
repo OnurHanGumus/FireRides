@@ -41,6 +41,7 @@ namespace Controllers
             else if (other.CompareTag("NextLevel"))
             {
                 CoreGameSignals.Instance.onNextLevel?.Invoke();
+                ScoreSignals.Instance.onHitTarget?.Invoke(10);
             }
             else if (other.CompareTag("TargetMiddle"))
             {

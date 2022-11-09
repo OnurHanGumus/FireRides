@@ -35,6 +35,7 @@ namespace Managers
             CoreGameSignals.Instance.onPlay += OnPlay;
             CoreGameSignals.Instance.onLevelFailed += OnLevelFailed;
             CoreGameSignals.Instance.onLevelSuccessful += OnLevelSuccessful;
+            CoreGameSignals.Instance.onRestartLevel += levelPanelController.OnRestartLevel;
             ScoreSignals.Instance.onScoreIncrease += levelPanelController.OnScoreUpdateText;
             ScoreSignals.Instance.onHighScore += highScorePanelController.UpdateText;
             ScoreSignals.Instance.onHitTarget += levelPanelController.OnHitTarget;
@@ -49,6 +50,7 @@ namespace Managers
             UISignals.Instance.onSetChangedText -= levelPanelController.OnScoreUpdateText;
             CoreGameSignals.Instance.onLevelFailed -= OnLevelFailed;
             CoreGameSignals.Instance.onLevelSuccessful -= OnLevelSuccessful;
+            CoreGameSignals.Instance.onRestartLevel -= levelPanelController.OnRestartLevel;
             ScoreSignals.Instance.onScoreIncrease -= levelPanelController.OnScoreUpdateText;
             ScoreSignals.Instance.onHighScore -= highScorePanelController.UpdateText;
             ScoreSignals.Instance.onHitTarget -= levelPanelController.OnHitTarget;

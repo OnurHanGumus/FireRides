@@ -58,7 +58,7 @@ public class LevelPanelController : MonoBehaviour
         }
         else
         {
-            commentTxt.text = "";
+            commentTxt.text = "     ";
             increasedTxt.text = value.ToString();
             ScoreSignals.Instance.onScoreIncrease?.Invoke(ScoreTypeEnums.Score, 1);
             ResetComboCounter();
@@ -68,7 +68,7 @@ public class LevelPanelController : MonoBehaviour
     private IEnumerator Effect()
     {
         comboPanel.DOScale(1, 0.5f).SetEase(Ease.Flash);
-        yield return new WaitForSeconds(1f);
+        yield return new WaitForSeconds(1.5f);
         comboPanel.localScale = Vector3.zero;
 
 
@@ -81,5 +81,9 @@ public class LevelPanelController : MonoBehaviour
     public void OnResetComboCounter()
     {
         ResetComboCounter();
+    }
+    public void OnRestartLevel()
+    {
+        _comboCounter = 1;
     }
 }
