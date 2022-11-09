@@ -31,9 +31,6 @@ namespace Managers
 
         #endregion
 
-
-
-
         #region Event Subscription
 
 
@@ -92,18 +89,6 @@ namespace Managers
         }
 
         #endregion
-
-        private void Update()
-        {
-            if (_player == null)
-            {
-                return;
-            }
-            if (_player.transform.position.z - transform.position.z > maksDistance)
-            {
-                gameObject.SetActive(false);
-            }
-        }
 
         private void OnPoolReseted()
         {

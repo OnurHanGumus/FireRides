@@ -21,7 +21,7 @@ namespace Managers
         #endregion
 
         #region Serialized Variables
-
+        [SerializeField] private BoxCollider wallDeactivatorCollider;
         #endregion
 
         #region Private Variables
@@ -61,6 +61,7 @@ namespace Managers
             PlayerSignals.Instance.onGetPlayer += OnGetPlayer;
 
             CoreGameSignals.Instance.onPlay += _movementController.OnPlay;
+            CoreGameSignals.Instance.onPlay += OnPlay;
             CoreGameSignals.Instance.onLevelFailed += _movementController.OnPlayerDie;
             CoreGameSignals.Instance.onRestartLevel += _movementController.OnReset;
             CoreGameSignals.Instance.onRestartLevel += OnResetLevel;
@@ -71,6 +72,7 @@ namespace Managers
         {
 
             InputSignals.Instance.onClicked -= _movementController.OnClicked;
+            CoreGameSignals.Instance.onPlay -= OnPlay;
             InputSignals.Instance.onInputReleased -= _movementController.OnReleased;
 
 
@@ -96,8 +98,15 @@ namespace Managers
             return transform;
         }
 
+        private void OnPlay()
+        {
+            wallDeactivatorCollider.enabled = true;
+
+        }
+
         private void OnResetLevel()
         {
+            wallDeactivatorCollider.enabled = false;
             transform.position = new Vector3(0, 0, 10);
             _tRenderer.Clear();
         }

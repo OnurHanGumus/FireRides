@@ -36,6 +36,13 @@ namespace Controllers
             {
                 ScoreSignals.Instance.onScoreIncrease?.Invoke(ScoreTypeEnums.Score, 1);
             }
+            else if (other.CompareTag("WallDeactivator"))
+            {
+                transform.parent.gameObject.SetActive(false);
+
+            }
         }
+
+
     }
 }

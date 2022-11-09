@@ -9,6 +9,7 @@ TagManager:
   - NextLevel
   - TargetMiddle
   - TargetBig
+  - WallDeactivator
   layers:
   - Default
   - TransparentFX
@@ -16,8 +17,8 @@ TagManager:
   - Grappable
   - Water
   - UI
-  - 
-  - 
+  - WallDeactivator
+  - WallPhysics
   - 
   - 
   - 
