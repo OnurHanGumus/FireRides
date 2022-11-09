@@ -27,7 +27,6 @@ namespace Managers
         #region Private Variables
         private PlayerData _data;
         private PlayerMovementController _movementController;
-        private TrailRenderer _tRenderer;
         #endregion
 
         #endregion
@@ -42,7 +41,6 @@ namespace Managers
 
             _data = GetData();
             _movementController = GetComponent<PlayerMovementController>();
-            _tRenderer = GetComponent<TrailRenderer>();
         }
         public PlayerData GetData() => Resources.Load<CD_Player>("Data/CD_Player").Data;
 
@@ -108,7 +106,6 @@ namespace Managers
         {
             wallDeactivatorCollider.enabled = false;
             transform.position = new Vector3(0, 0, 10);
-            _tRenderer.Clear();
         }
 
     }

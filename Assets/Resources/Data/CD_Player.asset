@@ -13,5 +13,5 @@ MonoBehaviour:
   m_Name: CD_Player
   m_EditorClassIdentifier: 
   Data:
-    Speed: 5
+    Speed: 10
     IncreasedSpeed: 5
