@@ -11,8 +11,8 @@ public class GrappingHookManager: MonoBehaviour
 
     #region Public Variables
     public Vector3 GrapplePoint;
-    public LayerMask whatIsGrappleable;
-    public Transform gunTip, camera, player;
+    public LayerMask WhatIsGrappleable;
+    public Transform GunTip, Camera, Player;
 
     #endregion
 
@@ -22,10 +22,9 @@ public class GrappingHookManager: MonoBehaviour
     #endregion
 
     #region Private Variables
-    private LineRenderer lr;
+    private LineRenderer _lr;
 
-    private float maxDistance = 1000f;
-    private SpringJoint joint;
+    private SpringJoint _joint;
     private bool _isGrapping = false;
     private GraplingData _data;
     #endregion
@@ -69,7 +68,7 @@ public class GrappingHookManager: MonoBehaviour
 
     private void Init()
     {
-        lr = GetComponent<LineRenderer>();
+        _lr = GetComponent<LineRenderer>();
         _data = GetData();
 
     }
@@ -95,8 +94,8 @@ public class GrappingHookManager: MonoBehaviour
     }
     void StartGrapple()
     {
-        lr.positionCount = 2;
-        currentGrapplePosition = gunTip.position;
+        _lr.positionCount = 2;
+        currentGrapplePosition = GunTip.position;
     }
 
 
@@ -105,27 +104,27 @@ public class GrappingHookManager: MonoBehaviour
     /// </summary>
     void StopGrapple()
     {
-        lr.positionCount = 0;
-        Destroy(joint);
+        _lr.positionCount = 0;
+        Destroy(_joint);
     }
 
     private Vector3 currentGrapplePosition;
 
     void DrawRope()
     {
-        if (lr.positionCount < 2)
+        if (_lr.positionCount < 2)
         {
             return;
         }
         currentGrapplePosition = Vector3.Lerp(currentGrapplePosition, GrapplePoint, Time.deltaTime * _data.Speed);
 
-        lr.SetPosition(0, gunTip.position);
-        lr.SetPosition(1, currentGrapplePosition);
+        _lr.SetPosition(0, GunTip.position);
+        _lr.SetPosition(1, currentGrapplePosition);
     }
 
     public bool IsGrappling()
     {
-        return joint != null;
+        return _joint != null;
     }
 
     public Vector3 GetGrapplePoint()

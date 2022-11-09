@@ -61,7 +61,10 @@ public class LevelPanelController : MonoBehaviour
             commentTxt.text = "     ";
             increasedTxt.text = value.ToString();
             ScoreSignals.Instance.onScoreIncrease?.Invoke(ScoreTypeEnums.Score, 1);
-            ResetComboCounter();
+            if (value == 1)
+            {
+                ResetComboCounter();
+            }
         }
     }
 
