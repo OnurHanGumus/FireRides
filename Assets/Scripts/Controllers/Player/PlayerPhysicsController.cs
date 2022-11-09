@@ -43,6 +43,7 @@ namespace Controllers
             else if (other.CompareTag("NextLevel"))
             {
                 CoreGameSignals.Instance.onNextLevel?.Invoke();
+                ScoreSignals.Instance.onScoreIncrease?.Invoke(ScoreTypeEnums.Score, 10);
                 ScoreSignals.Instance.onHitTarget?.Invoke(10);
                 AudioSignals.Instance.onPlaySound?.Invoke(SoundEnums.Breake);
 
