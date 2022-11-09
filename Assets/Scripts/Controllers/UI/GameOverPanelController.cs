@@ -31,12 +31,6 @@ public class GameOverPanelController : MonoBehaviour
     {
         _highScore = InitializeHighScore();
     }
-
-    private void Start()
-    {
-
-    }
-
     public void CloseGameOverPanel()
     {
         UISignals.Instance.onClosePanel?.Invoke(UIPanels.GameOverPanel);

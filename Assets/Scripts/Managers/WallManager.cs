@@ -92,6 +92,5 @@ namespace Managers
             _levelId = 0;
             ResetMaterial();
         }
-
     }
 }

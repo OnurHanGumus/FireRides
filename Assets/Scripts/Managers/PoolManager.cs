@@ -36,7 +36,6 @@ public class PoolManager : MonoBehaviour
     private void Awake()
     {
         Init();
-
     }
     private void Init()
     {
@@ -45,13 +44,8 @@ public class PoolManager : MonoBehaviour
         InitializeWallPool();
     }
 
-
-
     #region Event Subscriptions
-    void Start()
-    {
 
-    }
     private void OnEnable()
     {
         SubscribeEvents();
@@ -61,8 +55,6 @@ public class PoolManager : MonoBehaviour
     {
         PoolSignals.Instance.onGetDarkWallFromPool += OnGetDarkWall;
         PoolSignals.Instance.onGetLightWallFromPool += OnGetLightWall;
-
-
 
         PoolSignals.Instance.onGetPoolManagerObj += OnGetPoolManagerObj;
         PoolSignals.Instance.onGetAmount += OnGetAmount;
@@ -86,8 +78,6 @@ public class PoolManager : MonoBehaviour
 
     #endregion
 
-
-
     private void InitializeWallPool()
     {
         wallDarkPool = new List<GameObject>();
@@ -97,18 +87,13 @@ public class PoolManager : MonoBehaviour
         {
             tmp = Instantiate(wallPrefabs[0], transform);
             tmp1 = Instantiate(wallPrefabs[1], transform);
-
             tmp.transform.position = new Vector3(0, Random.Range(_data.Y_MinRandomPos, _data.Y_MaxRandomPos), (2*i+1)*2);
-
-
             tmp1.transform.position = new Vector3(0, Random.Range(_data.Y_MinRandomPos, _data.Y_MaxRandomPos), (i * 4));
 
             wallLightPool.Add(tmp);
             wallDarkPool.Add(tmp1);
         }
     }
-
-  
     public GameObject OnGetDarkWall()
     {
  
@@ -134,8 +119,6 @@ public class PoolManager : MonoBehaviour
         return null;
     }
 
- 
-
     public Transform OnGetPoolManagerObj()
     {
         return transform;
@@ -145,9 +128,6 @@ public class PoolManager : MonoBehaviour
     {
         return amountWallToPool;
     }
-
-
-
     private void OnReset()
     {
         for (int i = 0; i < amountWallToPool; i++)

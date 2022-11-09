@@ -60,15 +60,5 @@ namespace Managers
         {
             OnPlaySound(SoundEnums.Click);
         }
-
-        private void OnLevelFailed()
-        {
-
-        }
-
-        private void OnLevelSuccessful()
-        {
-
-        }
     }
 }

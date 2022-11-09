@@ -45,14 +45,5 @@ namespace Controllers
                 ScoreSignals.Instance.onMissTarget?.Invoke();
             }
         }
-
-        public void OnPlay()
-        {
-
-        }
-        public void OnReset()
-        {
-
-        }
     }
 }

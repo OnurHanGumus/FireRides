@@ -20,15 +20,9 @@ namespace Controllers
 
         #endregion
         #region Private Variables
-        //private EnemyData _data;
 
         #endregion
         #endregion
-
-        private void Start()
-        {
-            //_data = manager.GetEnemyData();
-        }
 
         private void OnTriggerExit(Collider other)
         {
@@ -39,10 +33,7 @@ namespace Controllers
             else if (other.CompareTag("WallDeactivator"))
             {
                 transform.parent.gameObject.SetActive(false);
-
             }
         }
-
-
     }
 }

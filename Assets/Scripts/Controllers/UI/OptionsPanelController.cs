@@ -44,6 +44,4 @@ public class OptionsPanelController : MonoBehaviour
            i.enabled = _audioSourceActiveness;
         }
     }
-
-
 }

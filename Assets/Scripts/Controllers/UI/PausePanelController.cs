@@ -18,12 +18,9 @@ public class PausePanelController : MonoBehaviour
         UISignals.Instance.onClosePanel?.Invoke(UIPanels.LevelPanel);
         CoreGameSignals.Instance.onRestartLevel?.Invoke();
         Time.timeScale = 1f;
-
     }
     public void ExitBtn()
     {
         Application.Quit();
     }
-
-
 }

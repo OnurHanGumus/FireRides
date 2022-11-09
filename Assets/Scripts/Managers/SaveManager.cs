@@ -29,10 +29,6 @@ namespace Managers
             _saveGameCommand = new SaveGameCommand();
 
             SendCollectablesInformation();
-            //SendPlayerUpgradesInformation();
-            //SendGunLevelsInformation();
-            //SendSelectedGunIdInformation();
-            //SendWorkerUpgradesInformation();
         }
 
         #region Event Subscription
@@ -48,34 +44,10 @@ namespace Managers
             SaveSignals.Instance.onSaveScore += OnSaveData;
             SaveSignals.Instance.onChangeSoundState += OnSaveData;
             SaveSignals.Instance.onGetScore += OnGetData;
-
             SaveSignals.Instance.onGetSoundState += OnGetData;
-            //SaveSignals.Instance.onGetSelectedGun += OnGetSelectedGunId; //Silah veya playere baðlý objenin idsi
-
-            //LevelSignals.Instance.onBuyArea += OnSaveListAddElement; //Açýlabilir kýsýmlar varsa bunlar id numaralarý liste içinde tutulur
-            //LevelSignals.Instance.onBuyEnemyArea += OnSaveListAddElement;
-            //LevelSignals.Instance.onBuyTurret += OnSaveListAddElement;
-            //LevelSignals.Instance.onBuyTurretOwners += OnSaveListAddElement;
-
-            //LevelSignals.Instance.onMinerCountIncreased += OnIncreaseMinerCount; //oyunda toplayýcý varsa
-            //LevelSignals.Instance.onGetMinerCount += OnGetMinerCount;
-            //LevelSignals.Instance.onSoldierCountIncreased += OnSaveData;
-            //LevelSignals.Instance.onGetSoldierCount += OnGetSoldierCount;
             CoreGameSignals.Instance.onSaveAndResetGameData += OnSaveGameData; //Level geçiþinde temp savelerin temizlenmesi içindir.
-            //PlayerSignals.Instance.onPlayerLeaveBuyArea += SetNewSaveAreaValue; //Idle oyunlarda kayýt için
-            //PlayerSignals.Instance.onPlayerSelectGun += OnSaveData;
-            
-
-            //SaveSignals.Instance.onGetOpenedTurrets += OnGetOpenedTurrets;
-
             SaveSignals.Instance.onGetBossHealth += OnGetBossHealth;
             SaveSignals.Instance.onBossTakedDamage += OnSaveData;
-
-            //UISignals.Instance.onChangeGunLevels += OnSaveList; //Satýn alma yerleri için
-            //UISignals.Instance.onGetGunLevels += OnGetGunLevels;
-            //SaveSignals.Instance.onUpgradePlayer += OnSaveList; 
-            //SaveSignals.Instance.onUpgradeWorker += OnSaveList;
-            //SaveSignals.Instance.onGetWorkerUpgrades += OnGetWorkerUpgrades;
             LevelSignals.Instance.onGetAreasCount += OnGetAreaCounts;
         }
 
@@ -84,34 +56,10 @@ namespace Managers
             SaveSignals.Instance.onSaveCollectables -= OnSaveData;
             SaveSignals.Instance.onSaveScore -= OnSaveData;
             SaveSignals.Instance.onChangeSoundState -= OnSaveData;
-
             SaveSignals.Instance.onGetSoundState -= OnGetData;
-
-            //SaveSignals.Instance.onGetSelectedGun -= OnGetSelectedGunId;
-
-
-            //LevelSignals.Instance.onBuyArea -= OnSaveListAddElement;
-            //LevelSignals.Instance.onBuyEnemyArea -= OnSaveListAddElement;
-            //LevelSignals.Instance.onBuyTurret -= OnSaveListAddElement;
-            //LevelSignals.Instance.onBuyTurretOwners -= OnSaveListAddElement;
-
-            //LevelSignals.Instance.onMinerCountIncreased -= OnIncreaseMinerCount;
-            //LevelSignals.Instance.onGetMinerCount -= OnGetMinerCount;
-            //LevelSignals.Instance.onSoldierCountIncreased -= OnSaveData;
-            //LevelSignals.Instance.onGetSoldierCount -= OnGetSoldierCount;
             CoreGameSignals.Instance.onSaveAndResetGameData -= OnSaveGameData;
-            //PlayerSignals.Instance.onPlayerLeaveBuyArea -= SetNewSaveAreaValue;
-            //PlayerSignals.Instance.onPlayerSelectGun -= OnSaveData;
-
-
-            //SaveSignals.Instance.onGetOpenedTurrets -= OnGetOpenedTurrets;
             SaveSignals.Instance.onGetBossHealth -= OnGetBossHealth;
             SaveSignals.Instance.onBossTakedDamage -= OnSaveData;
-            //UISignals.Instance.onChangeGunLevels -= OnSaveList;
-            //UISignals.Instance.onGetGunLevels -= OnGetGunLevels;
-            //SaveSignals.Instance.onUpgradePlayer -= OnSaveList;
-            //SaveSignals.Instance.onUpgradeWorker -= OnSaveList;
-            //SaveSignals.Instance.onGetWorkerUpgrades -= OnGetWorkerUpgrades;
             LevelSignals.Instance.onGetAreasCount -= OnGetAreaCounts;
         }
 
@@ -122,35 +70,18 @@ namespace Managers
 
         #endregion
 
-        private void OnSaveListAddElement(int id, SaveLoadStates saveType)
-        {
-            _saveGameCommand.OnSaveListAddElement(saveType, id);
-        }
-
-        private void OnSaveList(List<int> listToSave, SaveLoadStates saveType, SaveFiles fileName)
-        {
-            _saveGameCommand.OnSaveList(saveType, listToSave, fileName.ToString());
-        }
-
         private void OnSaveData(int value, SaveLoadStates saveType, SaveFiles saveFiles)
         {
             _saveGameCommand.OnSaveData(saveType, value, saveFiles.ToString());
 
         }
-        private void OnIncreaseMinerCount(int increaseAmount) //bu kullaným da vardýr ancak daha güzeli direk deðeri göndermektir.
-        {
-            int currentCount = _loadGameCommand.OnLoadGameData(SaveLoadStates.MinerCount, SaveFiles.WorkerCurrentCounts.ToString());
-            _saveGameCommand.OnSaveData(SaveLoadStates.MinerCount, currentCount + increaseAmount, SaveFiles.WorkerCurrentCounts.ToString());
-        }
+
         private void OnSaveGameData() //level geçiþlerindeki kayýt iþlemidir. Runnderse gold ve gem burada kaydedilir ancak idle oyunsa burada kayýt atmaya gerek yok çünkü toplandýðý an kaydedilir. Geçici deðerler sýfýrlanýr.
         {
             _saveGameCommand.OnSaveData(SaveLoadStates.Level, _loadGameCommand.OnLoadGameData(SaveLoadStates.Level) + 1);
             _saveGameCommand.OnSaveData(SaveLoadStates.Money, _loadGameCommand.OnLoadGameData(SaveLoadStates.Money));
             _saveGameCommand.OnSaveData(SaveLoadStates.Gem, _loadGameCommand.OnLoadGameData(SaveLoadStates.Gem));
-
         }
-
-
         private void SendCollectablesInformation() //Essential
         {
             SaveSignals.Instance.onInitializeSetMoney?.Invoke(_loadGameCommand.OnLoadGameData(SaveLoadStates.Money));
@@ -162,13 +93,6 @@ namespace Managers
             return _loadGameCommand.OnLoadGameData(state, file.ToString());
 
         }
-        
-        private List<int> OnGetGunLevels()
-        {
-            return _loadGameCommand.OnLoadList(SaveLoadStates.GunLevels, SaveFiles.Guns.ToString());
-        }
-
-
         private int[] OnGetAreaCounts(SaveLoadStates saveType)
         {
             return _loadGameCommand.OnLoadArray(saveType, SaveFiles.WorkerCurrentCounts.ToString());

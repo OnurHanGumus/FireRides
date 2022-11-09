@@ -41,9 +41,6 @@ namespace Managers
         }
 
         #endregion
-
-
-
         private void OnPlay()
         {
             foreach (var i in particules)

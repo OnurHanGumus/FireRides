@@ -101,7 +101,6 @@ namespace Managers
             wallDeactivatorCollider.enabled = true;
 
         }
-
         private void OnResetLevel()
         {
             wallDeactivatorCollider.enabled = false;
