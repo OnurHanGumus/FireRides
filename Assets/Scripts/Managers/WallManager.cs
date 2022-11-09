@@ -24,7 +24,6 @@ namespace Managers
         #endregion
 
         #region Private Variables
-        private Transform _player;
         private int _levelId = 0;
         private int _totalLevelCount = 0;
         #endregion
@@ -37,9 +36,7 @@ namespace Managers
         private void Init()
         {
             _totalLevelCount = LevelSignals.Instance.onGetTotalLevelCount();
-            Debug.Log(LevelSignals.Instance.onGetTotalLevelCount());
 
-            _player = PlayerSignals.Instance.onGetPlayer();
             ResetMaterial();
             
         }

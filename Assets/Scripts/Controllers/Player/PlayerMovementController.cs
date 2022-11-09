@@ -1,3 +1,4 @@
+using System.Collections;
 using System.Collections.Generic;
 using Data.ValueObject;
 using Enums;
@@ -22,6 +23,7 @@ namespace Controllers
         private bool _isClicked = false;
         private bool _isNotStarted = true;
         private bool _isPlayerDead = false;
+        private bool _isRopeReached = false;
         private float a = 0;
 
         float maxStrength = 15;
@@ -50,7 +52,7 @@ namespace Controllers
                 return;
             }
 
-            if (_isClicked)
+            if (_isClicked && _isRopeReached)
             {
                 _rig.velocity = new Vector3(0, Mathf.SmoothDamp(_rig.velocity.y, maxStrength, ref a , recoveryRate * Time.fixedDeltaTime), _data.Speed + _data.IncreasedSpeed);
             }
@@ -60,13 +62,22 @@ namespace Controllers
             }
         }
 
+        private IEnumerator Later()
+        {
+            yield return new WaitForSeconds(0.1f);
+            _isRopeReached = true;
+        }
+
         public void OnClicked(bool isClicked)
         {
             _isClicked = isClicked;
+            StartCoroutine(Later());
         }
         public void OnReleased(bool isClicked)
         {
             _isClicked = isClicked;
+            _isRopeReached = false;
+            StopAllCoroutines();
         }
 
         public float OnGetPlayerSpeed()
