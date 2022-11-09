@@ -39,9 +39,8 @@ namespace Managers
 
         private void Init()
         {
-            Object[] Levels = Resources.LoadAll("Levels");
-            _totalLevelCount = Levels.Length;
-
+            _totalLevelCount = LevelSignals.Instance.onGetTotalLevelCount();
+            Debug.Log(LevelSignals.Instance.onGetTotalLevelCount());
 
             _player = PlayerSignals.Instance.onGetPlayer();
             ResetMaterial();
@@ -81,7 +80,7 @@ namespace Managers
 
         private void OnDisable()
         {
-            if (_totalLevelCount == _levelId)
+            if (_totalLevelCount - 1 == _levelId)
             {
                 _levelId = 0;
             }

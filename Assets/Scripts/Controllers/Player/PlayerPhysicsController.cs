@@ -42,6 +42,14 @@ namespace Controllers
             {
                 CoreGameSignals.Instance.onNextLevel?.Invoke();
             }
+            else if (other.CompareTag("TargetMiddle"))
+            {
+                ScoreSignals.Instance.onScoreIncrease?.Invoke(ScoreTypeEnums.Score, 2);
+            }
+            else if (other.CompareTag("TargetBig"))
+            {
+                ScoreSignals.Instance.onScoreIncrease?.Invoke(ScoreTypeEnums.Score, 1);
+            }
         }
 
         public void OnPlay()

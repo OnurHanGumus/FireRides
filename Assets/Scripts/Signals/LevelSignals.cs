@@ -34,6 +34,7 @@ namespace Signals
 
         public Func<int> onGetCurrentModdedLevel = delegate { return 0; };
         public Func<int> onGetCurrentLevel = delegate { return 0; };
+        public Func<int> onGetTotalLevelCount = delegate { return 0; };
 
         //-----areas
         public Func<SaveLoadStates, int[]> onGetAreasCount = delegate { return null; };

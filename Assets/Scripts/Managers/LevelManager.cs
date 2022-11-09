@@ -25,13 +25,15 @@ namespace Managers
         [Space] [SerializeField] private GameObject levelHolder;
         [SerializeField] private LevelLoaderCommand levelLoader;
         [SerializeField] private ClearActiveLevelCommand levelClearer;
+        UnityEngine.Object[] Levels;
+
 
         #endregion
 
         #region Private Variables
 
         [ShowInInspector] private int _levelID;
-
+        private int _totalLevelCount = 0;
         #endregion
 
         #endregion
@@ -39,6 +41,14 @@ namespace Managers
         private void Awake()
         {
             //_levelID = GetActiveLevel();
+            Init();
+        }
+
+        private void Init()
+        {
+            Levels = Resources.LoadAll("Levels");
+            _totalLevelCount = Levels.Length;
+
         }
 
 
@@ -56,7 +66,9 @@ namespace Managers
             CoreGameSignals.Instance.onNextLevel += OnNextLevel;
             CoreGameSignals.Instance.onRestartLevel += OnRestartLevel;
             CoreGameSignals.Instance.onGetLevelID += OnGetLevelID;
-            CoreGameSignals.Instance.onLevelFailed += OnPlayerDie; 
+            CoreGameSignals.Instance.onLevelFailed += OnPlayerDie;
+
+            LevelSignals.Instance.onGetTotalLevelCount += OnGetTotalLevelCount;
 
         }
 
@@ -70,6 +82,8 @@ namespace Managers
             CoreGameSignals.Instance.onRestartLevel -= OnRestartLevel;
             CoreGameSignals.Instance.onGetLevelID -= OnGetLevelID;
             CoreGameSignals.Instance.onLevelFailed -= OnPlayerDie;
+
+            LevelSignals.Instance.onGetTotalLevelCount -= OnGetTotalLevelCount;
 
         }
 
@@ -107,7 +121,6 @@ namespace Managers
 
         private void OnInitializeLevel()
         {
-            UnityEngine.Object[] Levels = Resources.LoadAll("Levels");
             int newLevelId = _levelID % Levels.Length;
             levelLoader.InitializeLevel((GameObject)Levels[newLevelId], levelHolder.transform, _levelID);
         }
@@ -120,6 +133,11 @@ namespace Managers
         private void OnPlayerDie()
         {
             _levelID = 0;
+        }
+
+        private int OnGetTotalLevelCount()
+        {
+            return _totalLevelCount;
         }
     }
 }
