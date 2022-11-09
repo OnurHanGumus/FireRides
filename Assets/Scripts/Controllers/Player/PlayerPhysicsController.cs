@@ -44,11 +44,11 @@ namespace Controllers
             }
             else if (other.CompareTag("TargetMiddle"))
             {
-                ScoreSignals.Instance.onScoreIncrease?.Invoke(ScoreTypeEnums.Score, 2);
+                ScoreSignals.Instance.onHitTarget?.Invoke(2);
             }
             else if (other.CompareTag("TargetBig"))
             {
-                ScoreSignals.Instance.onScoreIncrease?.Invoke(ScoreTypeEnums.Score, 1);
+                ScoreSignals.Instance.onHitTarget?.Invoke(1);
             }
         }
 

@@ -16,6 +16,9 @@ namespace Signals
 
 
         public UnityAction onHighScore = delegate { };
+        public UnityAction<int> onHitTarget = delegate { };
+        public UnityAction onMissTarget = delegate { };
+
 
     }
 }

@@ -38,6 +38,13 @@ namespace Controllers
                 Destroy(gameObject);
             }
         }
+        private void OnTriggerExit(Collider other)
+        {
+            if (other.CompareTag("WallDeactivator"))
+            {
+                ScoreSignals.Instance.onMissTarget?.Invoke();
+            }
+        }
 
         public void OnPlay()
         {

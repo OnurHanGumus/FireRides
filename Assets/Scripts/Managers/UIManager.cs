@@ -37,7 +37,8 @@ namespace Managers
             CoreGameSignals.Instance.onLevelSuccessful += OnLevelSuccessful;
             ScoreSignals.Instance.onScoreIncrease += levelPanelController.OnScoreUpdateText;
             ScoreSignals.Instance.onHighScore += highScorePanelController.UpdateText;
-
+            ScoreSignals.Instance.onHitTarget += levelPanelController.OnHitTarget;
+            ScoreSignals.Instance.onMissTarget += levelPanelController.OnResetComboCounter;
         }
 
         private void UnsubscribeEvents()
@@ -50,6 +51,8 @@ namespace Managers
             CoreGameSignals.Instance.onLevelSuccessful -= OnLevelSuccessful;
             ScoreSignals.Instance.onScoreIncrease -= levelPanelController.OnScoreUpdateText;
             ScoreSignals.Instance.onHighScore -= highScorePanelController.UpdateText;
+            ScoreSignals.Instance.onHitTarget -= levelPanelController.OnHitTarget;
+            ScoreSignals.Instance.onMissTarget -= levelPanelController.OnResetComboCounter;
 
         }
 
