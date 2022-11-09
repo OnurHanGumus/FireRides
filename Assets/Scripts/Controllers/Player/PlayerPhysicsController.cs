@@ -44,6 +44,8 @@ namespace Controllers
             {
                 CoreGameSignals.Instance.onNextLevel?.Invoke();
                 ScoreSignals.Instance.onHitTarget?.Invoke(10);
+                AudioSignals.Instance.onPlaySound?.Invoke(SoundEnums.Breake);
+
             }
             else if (other.CompareTag("TargetMiddle"))
             {
