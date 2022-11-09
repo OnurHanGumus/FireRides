@@ -4,6 +4,7 @@ using Data.ValueObject;
 using Enums;
 using Keys;
 using Managers;
+using Signals;
 using UnityEngine;
 
 namespace Controllers
@@ -70,6 +71,7 @@ namespace Controllers
 
         public void OnClicked(bool isClicked)
         {
+            AudioSignals.Instance.onPlaySound?.Invoke(SoundEnums.Rope);
             _isClicked = isClicked;
             StartCoroutine(Later());
         }

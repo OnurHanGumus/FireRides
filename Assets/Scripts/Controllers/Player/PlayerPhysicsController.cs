@@ -37,6 +37,8 @@ namespace Controllers
             if (other.CompareTag("Grappable") || other.CompareTag("Wall"))
             {
                 CoreGameSignals.Instance.onLevelFailed?.Invoke();
+                AudioSignals.Instance.onPlaySound?.Invoke(SoundEnums.Sonme);
+
             }
             else if (other.CompareTag("NextLevel"))
             {
@@ -46,10 +48,13 @@ namespace Controllers
             else if (other.CompareTag("TargetMiddle"))
             {
                 ScoreSignals.Instance.onHitTarget?.Invoke(2);
+                AudioSignals.Instance.onPlaySound?.Invoke(SoundEnums.Breake);
+
             }
             else if (other.CompareTag("TargetBig"))
             {
                 ScoreSignals.Instance.onHitTarget?.Invoke(1);
+                AudioSignals.Instance.onPlaySound?.Invoke(SoundEnums.Breake);
             }
         }
 
