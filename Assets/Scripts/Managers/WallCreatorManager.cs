@@ -31,7 +31,6 @@ namespace Managers
         private bool _isReset = false;
         private WallData _data;
         private int _defaultStartPos = 0;
-        private int _levelId = 0;
         #endregion
 
         #endregion
@@ -63,7 +62,6 @@ namespace Managers
             ScoreSignals.Instance.onScoreIncrease += OnScoreIncreased;
             CoreGameSignals.Instance.onRestartLevel += OnReset;
             CoreGameSignals.Instance.onPlay += OnPlay;
-            CoreGameSignals.Instance.onNextLevel += OnLevelIncreased;
         }
 
 
@@ -73,8 +71,6 @@ namespace Managers
             ScoreSignals.Instance.onScoreIncrease -= OnScoreIncreased;
             CoreGameSignals.Instance.onRestartLevel += OnReset;
             CoreGameSignals.Instance.onPlay -= OnPlay;
-            CoreGameSignals.Instance.onNextLevel -= OnLevelIncreased;
-
         }
 
         private void OnDisable()
@@ -104,29 +100,21 @@ namespace Managers
             }
             if (wall == null)
             {
-                Debug.Log("nullmuþ");
                 return;
             }
             lastWallZPos += 2;
 
             wall.transform.position = new Vector3(0, UnityEngine.Random.Range(_data.Y_MinRandomPos, _data.Y_MaxRandomPos), lastWallZPos);
             wall.SetActive(true);
-            Debug.Log("taþýndý");
-
         }
 
         private void OnPlay()
         {
             _isReset = false;
         }
-        private void OnLevelIncreased()
-        {
-            ++_levelId;
-        }
         private void OnReset()
         {
             _isReset = true;
-            _levelId = 0;
             lastWallZPos = _defaultStartPos;
         }
     }

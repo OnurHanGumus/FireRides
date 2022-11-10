@@ -79,8 +79,6 @@ namespace Managers
         {
             ScoreSignals.Instance.onScoreIncrease += OnScoreIncrease;
             ScoreSignals.Instance.onScoreDecrease += OnScoreDecrease;
-            ScoreSignals.Instance.onGetMoney += OnGetMoney;
-            ScoreSignals.Instance.onGetGem += OnGetGem;
             ScoreSignals.Instance.onGetScore += OnGetScore;
 
             CoreGameSignals.Instance.onPlay += OnPlay;
@@ -91,8 +89,6 @@ namespace Managers
         {
             ScoreSignals.Instance.onScoreIncrease -= OnScoreIncrease;
             ScoreSignals.Instance.onScoreDecrease -= OnScoreDecrease;
-            ScoreSignals.Instance.onGetMoney -= OnGetMoney;
-            ScoreSignals.Instance.onGetGem -= OnGetGem;
             ScoreSignals.Instance.onGetScore -= OnGetScore;
 
             CoreGameSignals.Instance.onPlay -= OnPlay;

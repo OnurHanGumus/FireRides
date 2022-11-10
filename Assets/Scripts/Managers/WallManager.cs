@@ -18,7 +18,6 @@ namespace Managers
 
         #region Serialized Variables
         [SerializeField] private int maksDistance = 10;
-        [SerializeField] private MeshRenderer mesh1, mesh2, mesh3;
         [SerializeField] private List<MeshRenderer> meshList;
         [SerializeField] private int colorType = 0;
 

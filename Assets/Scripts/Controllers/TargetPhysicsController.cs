@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using Data.UnityObject;
 using Data.ValueObject;
 using Enums;
 using Managers;
@@ -15,7 +16,7 @@ namespace Controllers
         #endregion
 
         #region Private Variables
-
+        private TargetData _data;
 
         #endregion
         #endregion
@@ -27,8 +28,11 @@ namespace Controllers
 
         private void Init()
         {
-            transform.eulerAngles = new Vector3(Random.Range(-16,17), 162,0);
+            _data = GetData();
+            transform.eulerAngles = new Vector3(Random.Range(_data.MinEulerXValue, _data.MaxEulerXValue), _data.PreferedEulerYValue, 0);
         }
+
+        private TargetData GetData() => Resources.Load<CD_Target>("Data/CD_Target").TargetData;
 
         private void OnTriggerEnter(Collider other)
         {
