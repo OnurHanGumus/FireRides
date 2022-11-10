@@ -33,7 +33,8 @@ namespace Managers
         [ShowInInspector] private int _levelID;
         private int _totalLevelCount = 0;
         private UnityEngine.Object[] _levels;
-
+        private WallData _data;
+        private int _poolObjectCount;
         #endregion
 
         #endregion
@@ -47,8 +48,10 @@ namespace Managers
         {
             _levels = Resources.LoadAll("Levels");
             _totalLevelCount = _levels.Length;
+            _data = GetData();
 
         }
+        private WallData GetData() => Resources.Load<CD_Wall>("Data/CD_Wall").wallData;
 
 
         #region Event Subscription
@@ -68,6 +71,7 @@ namespace Managers
             CoreGameSignals.Instance.onLevelFailed += OnPlayerDie;
 
             LevelSignals.Instance.onGetTotalLevelCount += OnGetTotalLevelCount;
+            PoolSignals.Instance.onInitializeAmountOfPool += OnInitializePools;
         }
 
         private void UnsubscribeEvents()
@@ -80,6 +84,7 @@ namespace Managers
             CoreGameSignals.Instance.onLevelFailed -= OnPlayerDie;
 
             LevelSignals.Instance.onGetTotalLevelCount -= OnGetTotalLevelCount;
+            PoolSignals.Instance.onInitializeAmountOfPool -= OnInitializePools;
         }
 
         private void OnDisable()
@@ -117,7 +122,7 @@ namespace Managers
         private void OnInitializeLevel()
         {
             int newLevelId = _levelID % _levels.Length;
-            levelLoader.InitializeLevel((GameObject)_levels[newLevelId], levelHolder.transform, _levelID);
+            levelLoader.InitializeLevel((GameObject)_levels[newLevelId], levelHolder.transform, _levelID, _data, _poolObjectCount);
         }
 
         private void OnClearActiveLevel()
@@ -133,6 +138,11 @@ namespace Managers
         private int OnGetTotalLevelCount()
         {
             return _totalLevelCount;
+        }
+
+        private void OnInitializePools(int amount)
+        {
+            _poolObjectCount = amount;
         }
     }
 }

@@ -333,9 +333,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maksDistance: 10
-  mesh1: {fileID: 782115864096770163}
-  mesh2: {fileID: 782115864648241127}
-  mesh3: {fileID: 782115865603381654}
   meshList:
   - {fileID: 782115864096770163}
   - {fileID: 782115864648241127}

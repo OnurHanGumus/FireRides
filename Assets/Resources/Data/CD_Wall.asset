@@ -15,3 +15,4 @@ MonoBehaviour:
   wallData:
     Y_MaxRandomPos: -2
     Y_MinRandomPos: 3
+    WallZAxisLenght: 2

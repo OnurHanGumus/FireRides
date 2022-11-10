@@ -1912,9 +1912,8 @@ MonoBehaviour:
   wallPrefabs:
   - {fileID: 1432822035316680172, guid: 1d449d5083f1c0b4b908ac6b95dd9729, type: 3}
   - {fileID: 5616346699358648838, guid: d9dc8e7ef33dc6545a22512e7ce6b9be, type: 3}
-  wallDarkPool: []
-  wallLightPool: []
-  amountWallToPool: 45
+  wallPool: []
+  amountWallToPool: 90
 --- !u!1 &749374685
 GameObject:
   m_ObjectHideFlags: 0
