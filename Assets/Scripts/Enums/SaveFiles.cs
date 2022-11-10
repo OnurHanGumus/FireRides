@@ -6,11 +6,6 @@ namespace Enums
     public enum SaveFiles
     {
         SaveFile,
-        Guns,
-        WorkerCurrentCounts,
-        PlayerImprovements,
-        WorkerUpgrades,
         GameOptions,
-
     }
 }

@@ -19,6 +19,7 @@ namespace Managers
         #region Serialized Variables
         [SerializeField] private int maksDistance = 10;
         [SerializeField] private MeshRenderer mesh1, mesh2, mesh3;
+        [SerializeField] private List<MeshRenderer> meshList;
         [SerializeField] private int colorType = 0;
 
         #endregion
@@ -36,15 +37,14 @@ namespace Managers
         private void Init()
         {
             _totalLevelCount = LevelSignals.Instance.onGetTotalLevelCount();
-
             ResetMaterial();
-            
         }
         private void ResetMaterial()
         {
-            mesh1.material = Resources.Load(("Materials/" + (_levelId + 1).ToString() + "/" + colorType).ToString()) as Material;
-            mesh2.material = Resources.Load(("Materials/" + (_levelId + 1).ToString() + "/" + colorType).ToString()) as Material;
-            mesh3.material = Resources.Load(("Materials/" + (_levelId + 1).ToString() + "/" + colorType).ToString()) as Material;
+            foreach (var i in meshList)
+            {
+                i.material = Resources.Load(("Materials/" + (_levelId + 1).ToString() + "/" + colorType).ToString()) as Material;
+            }
         }
 
         private void OnEnable()
@@ -63,8 +63,6 @@ namespace Managers
         {
             PoolSignals.Instance.onPoolReseted += OnPoolReseted;
         }
-
-
 
         private void UnsubscribeEvents()
         {

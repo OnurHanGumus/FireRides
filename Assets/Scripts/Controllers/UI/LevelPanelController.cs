@@ -73,8 +73,6 @@ public class LevelPanelController : MonoBehaviour
         comboPanel.DOScale(1, 0.5f).SetEase(Ease.Flash);
         yield return new WaitForSeconds(1.5f);
         comboPanel.localScale = Vector3.zero;
-
-
     }
     private void ResetComboCounter()
     {

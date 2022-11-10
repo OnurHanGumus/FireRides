@@ -33,8 +33,6 @@ namespace Managers
         private void UnsubscribeEvents()
         {
             AudioSignals.Instance.onPlaySound -= OnPlaySound;
-
-
         }
 
         private void OnDisable()
@@ -46,16 +44,19 @@ namespace Managers
 
         private void OnPlaySound(SoundEnums id)
         {
-            if (!sources[0].isPlaying)
+            foreach (var i in sources)
             {
-                sources[0].PlayOneShot(sounds[(int)id]);
-            }
-            else
-            {
-                sources[1].PlayOneShot(sounds[(int)id]);
+                if (i.isPlaying)
+                {
+                    continue;
+                }
+                else
+                {
+                    i.PlayOneShot(sounds[(int)id]);
+                    break;
+                }
             }
         }
-
         public void ButtonClickSound()
         {
             OnPlaySound(SoundEnums.Click);

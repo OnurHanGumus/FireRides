@@ -5,7 +5,6 @@ using Data.UnityObject;
 using Data.ValueObject;
 using Enums;
 using Extentions;
-using Keys;
 using Signals;
 using Sirenix.OdinInspector;
 using UnityEngine;
@@ -18,7 +17,6 @@ namespace Managers
         #region Self Variables
 
         #region Public Variables
-
 
         #endregion
 
@@ -35,8 +33,6 @@ namespace Managers
         #endregion
 
         #endregion
-
-
 
         #region Event Subscription
 
@@ -101,6 +97,5 @@ namespace Managers
             _levelId = 0;
             ChangeColor();
         }
-
     }
 }

@@ -5,7 +5,6 @@ using Controllers;
 using Data.UnityObject;
 using Data.ValueObject;
 using Extentions;
-using Keys;
 using Signals;
 using Sirenix.OdinInspector;
 using UnityEngine;
@@ -84,9 +83,6 @@ namespace Managers
             ScoreSignals.Instance.onGetGem += OnGetGem;
             ScoreSignals.Instance.onGetScore += OnGetScore;
 
-            SaveSignals.Instance.onInitializeSetMoney += OnInitializeSetMoney;
-            SaveSignals.Instance.onInitializeSetGem += OnInitializeSetGem;
-
             CoreGameSignals.Instance.onPlay += OnPlay;
             CoreGameSignals.Instance.onRestartLevel += OnReset;
         }
@@ -99,12 +95,8 @@ namespace Managers
             ScoreSignals.Instance.onGetGem -= OnGetGem;
             ScoreSignals.Instance.onGetScore -= OnGetScore;
 
-            SaveSignals.Instance.onInitializeSetMoney -= OnInitializeSetMoney;
-            SaveSignals.Instance.onInitializeSetGem -= OnInitializeSetGem;
-
             CoreGameSignals.Instance.onPlay -= OnPlay;
             CoreGameSignals.Instance.onRestartLevel -= OnReset;
-
         }
 
         private void OnDisable()
@@ -120,14 +112,6 @@ namespace Managers
             {
                 _money += amount;
                 UISignals.Instance.onSetChangedText?.Invoke(type, _money);
-                SaveSignals.Instance.onSaveCollectables?.Invoke(_money, SaveLoadStates.Money, SaveFiles.SaveFile);
-
-            }
-            else if(type.Equals(ScoreTypeEnums.Money))
-            {
-                _gem += amount;
-                UISignals.Instance.onSetChangedText?.Invoke(type, _gem);
-                SaveSignals.Instance.onSaveCollectables?.Invoke(_gem, SaveLoadStates.Gem, SaveFiles.SaveFile);
             }
             else
             {
@@ -142,14 +126,6 @@ namespace Managers
             {
                 _money -= amount;
                 UISignals.Instance.onSetChangedText?.Invoke(type, _money);
-                SaveSignals.Instance.onSaveCollectables?.Invoke(_money, SaveLoadStates.Money, SaveFiles.SaveFile);
-
-            }
-            else
-            {
-                _gem -= amount;
-                UISignals.Instance.onSetChangedText?.Invoke(type, _gem);
-                SaveSignals.Instance.onSaveCollectables?.Invoke(_gem, SaveLoadStates.Gem, SaveFiles.SaveFile);
             }
         }
 
@@ -167,21 +143,6 @@ namespace Managers
         {
             return Score;
         }
-
-        private void OnInitializeSetMoney(int amount)
-        {
-            Money = amount;
-            UISignals.Instance.onSetChangedText?.Invoke(ScoreTypeEnums.Money, _money);
-
-        }
-
-        private void OnInitializeSetGem(int amount)
-        {
-            Gem = amount;
-            UISignals.Instance.onSetChangedText?.Invoke(ScoreTypeEnums.Gem, _gem);
-
-        }
-
         private void OnPlay()
         {
             Score = 0;
@@ -192,7 +153,6 @@ namespace Managers
         {
             Score = 0;
             UISignals.Instance.onSetChangedText?.Invoke(ScoreTypeEnums.Score, Score);
-
         }
     }
 }

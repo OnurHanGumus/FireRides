@@ -2,7 +2,6 @@ using System.Collections;
 using System.Collections.Generic;
 using Data.ValueObject;
 using Enums;
-using Keys;
 using Managers;
 using Signals;
 using UnityEngine;
@@ -25,10 +24,10 @@ namespace Controllers
         private bool _isNotStarted = true;
         private bool _isPlayerDead = false;
         private bool _isRopeReached = false;
-        private float a = 0;
+        private float _referencePoint = 0;
 
-        float maxStrength = 15;
-        float recoveryRate = 25f;
+        private float _maxStrength = 15;
+        private float _recoveryRate = 25f;
 
         #endregion
         #endregion
@@ -55,7 +54,7 @@ namespace Controllers
 
             if (_isClicked && _isRopeReached)
             {
-                _rig.velocity = new Vector3(0, Mathf.SmoothDamp(_rig.velocity.y, maxStrength, ref a , recoveryRate * Time.fixedDeltaTime), _data.Speed + _data.IncreasedSpeed);
+                _rig.velocity = new Vector3(0, Mathf.SmoothDamp(_rig.velocity.y, _maxStrength, ref _referencePoint, _recoveryRate * Time.fixedDeltaTime), _data.Speed + _data.IncreasedSpeed);
             }
             else
             {

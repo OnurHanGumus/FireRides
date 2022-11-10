@@ -4,7 +4,6 @@ using Data.UnityObject;
 using Data.ValueObject;
 using Enums;
 using Extentions;
-using Keys;
 using Signals;
 using Sirenix.OdinInspector;
 using UnityEngine;
@@ -25,7 +24,6 @@ namespace Managers
         [Space] [SerializeField] private GameObject levelHolder;
         [SerializeField] private LevelLoaderCommand levelLoader;
         [SerializeField] private ClearActiveLevelCommand levelClearer;
-        UnityEngine.Object[] Levels;
 
 
         #endregion
@@ -34,20 +32,21 @@ namespace Managers
 
         [ShowInInspector] private int _levelID;
         private int _totalLevelCount = 0;
+        private UnityEngine.Object[] _levels;
+
         #endregion
 
         #endregion
 
         private void Awake()
         {
-            //_levelID = GetActiveLevel();
             Init();
         }
 
         private void Init()
         {
-            Levels = Resources.LoadAll("Levels");
-            _totalLevelCount = Levels.Length;
+            _levels = Resources.LoadAll("Levels");
+            _totalLevelCount = _levels.Length;
 
         }
 
@@ -69,10 +68,7 @@ namespace Managers
             CoreGameSignals.Instance.onLevelFailed += OnPlayerDie;
 
             LevelSignals.Instance.onGetTotalLevelCount += OnGetTotalLevelCount;
-
         }
-
-
 
         private void UnsubscribeEvents()
         {
@@ -84,7 +80,6 @@ namespace Managers
             CoreGameSignals.Instance.onLevelFailed -= OnPlayerDie;
 
             LevelSignals.Instance.onGetTotalLevelCount -= OnGetTotalLevelCount;
-
         }
 
         private void OnDisable()
@@ -121,8 +116,8 @@ namespace Managers
 
         private void OnInitializeLevel()
         {
-            int newLevelId = _levelID % Levels.Length;
-            levelLoader.InitializeLevel((GameObject)Levels[newLevelId], levelHolder.transform, _levelID);
+            int newLevelId = _levelID % _levels.Length;
+            levelLoader.InitializeLevel((GameObject)_levels[newLevelId], levelHolder.transform, _levelID);
         }
 
         private void OnClearActiveLevel()

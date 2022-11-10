@@ -1,7 +1,6 @@
 using System;
 using Enums;
 using Extentions;
-using Keys;
 using Signals;
 using UnityEngine;
 
@@ -22,7 +21,7 @@ public class GameManager : MonoBehaviour
         Application.targetFrameRate = 60;
     }
 
-
+    #region Event Subcription
     private void OnEnable()
     {
         SubscribeEvents();
@@ -41,4 +40,5 @@ public class GameManager : MonoBehaviour
     {
         UnsubscribeEvents();
     }
+    #endregion
 }

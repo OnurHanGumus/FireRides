@@ -10,21 +10,20 @@ public class GrappingHookManager: MonoBehaviour
     #region Self Variables
 
     #region Public Variables
-    public Vector3 GrapplePoint;
-    public LayerMask WhatIsGrappleable;
-    public Transform GunTip, Camera, Player;
+    
 
     #endregion
 
     #region Serialized Variables
-
+    [SerializeField] private Transform startPoint;
+    [SerializeField] private Vector3 grapplePoint;
+    [SerializeField] private LayerMask whatIsGrappleable;
 
     #endregion
 
     #region Private Variables
     private LineRenderer _lr;
 
-    private SpringJoint _joint;
     private bool _isGrapping = false;
     private GraplingData _data;
     #endregion
@@ -44,8 +43,6 @@ public class GrappingHookManager: MonoBehaviour
         InputSignals.Instance.onClicked += OnClicked;
         InputSignals.Instance.onInputReleased += OnReleased;
     }
-
-
 
     private void UnsubscribeEvents()
     {
@@ -89,23 +86,18 @@ public class GrappingHookManager: MonoBehaviour
         }
         if (other.CompareTag("Grappable"))
         {
-            GrapplePoint = new Vector3(other.transform.position.x, other.transform.position.y - 8, other.transform.position.z);
+            grapplePoint = new Vector3(other.transform.position.x, other.transform.position.y - 8, other.transform.position.z);
         }
     }
     void StartGrapple()
     {
         _lr.positionCount = 2;
-        currentGrapplePosition = GunTip.position;
+        currentGrapplePosition = startPoint.position;
     }
 
-
-    /// <summary>
-    /// Call whenever we want to stop a grapple
-    /// </summary>
     void StopGrapple()
     {
         _lr.positionCount = 0;
-        Destroy(_joint);
     }
 
     private Vector3 currentGrapplePosition;
@@ -116,20 +108,15 @@ public class GrappingHookManager: MonoBehaviour
         {
             return;
         }
-        currentGrapplePosition = Vector3.Lerp(currentGrapplePosition, GrapplePoint, Time.deltaTime * _data.Speed);
+        currentGrapplePosition = Vector3.Lerp(currentGrapplePosition, grapplePoint, Time.deltaTime * _data.Speed);
 
-        _lr.SetPosition(0, GunTip.position);
+        _lr.SetPosition(0, startPoint.position);
         _lr.SetPosition(1, currentGrapplePosition);
-    }
-
-    public bool IsGrappling()
-    {
-        return _joint != null;
     }
 
     public Vector3 GetGrapplePoint()
     {
-        return GrapplePoint;
+        return grapplePoint;
     }
 
     private void OnClicked(bool isClicked)

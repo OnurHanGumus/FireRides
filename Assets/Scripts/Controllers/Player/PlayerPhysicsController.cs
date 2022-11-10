@@ -1,7 +1,6 @@
 using System.Collections.Generic;
 using Data.ValueObject;
 using Enums;
-using Keys;
 using Managers;
 using Signals;
 using UnityEngine;
@@ -59,15 +58,6 @@ namespace Controllers
                 ScoreSignals.Instance.onHitTarget?.Invoke(1);
                 AudioSignals.Instance.onPlaySound?.Invoke(SoundEnums.Breake);
             }
-        }
-
-        public void OnPlay()
-        {
-
-        }
-        public void OnReset()
-        {
-
         }
     }
 }

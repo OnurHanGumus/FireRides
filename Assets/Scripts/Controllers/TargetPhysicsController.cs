@@ -1,7 +1,6 @@
 using System.Collections.Generic;
 using Data.ValueObject;
 using Enums;
-using Keys;
 using Managers;
 using Signals;
 using UnityEngine;
@@ -28,7 +27,7 @@ namespace Controllers
 
         private void Init()
         {
-            transform.eulerAngles = new Vector3(Random.Range(-16,17),162,0);
+            transform.eulerAngles = new Vector3(Random.Range(-16,17), 162,0);
         }
 
         private void OnTriggerEnter(Collider other)

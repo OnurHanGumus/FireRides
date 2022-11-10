@@ -13,23 +13,22 @@ public class OptionsPanelController : MonoBehaviour
     #endregion
     #region SerializeField Variables
     [SerializeField] private Toggle soundToggle;
-    [SerializeField] private List<AudioSource> audioSource;
     #endregion
     #region Private Variables
-    private bool _audioSourceActiveness;
+    private bool _audioDisabled;
     #endregion
     #endregion
 
     private void Start()
     {
-        _audioSourceActiveness = SaveSignals.Instance.onGetSoundState(SaveLoadStates.SoundState, SaveFiles.GameOptions) == 1;
-        soundToggle.isOn = _audioSourceActiveness;
+        _audioDisabled = SaveSignals.Instance.onGetSoundState(SaveLoadStates.SoundState, SaveFiles.GameOptions) == 0;
+        soundToggle.isOn = !_audioDisabled;
         EnableAudioSource();
     }
     public void OnValueChanged()
     {
         SaveSignals.Instance.onChangeSoundState?.Invoke(soundToggle.isOn ? 1 : 0, SaveLoadStates.SoundState, SaveFiles.GameOptions);
-        _audioSourceActiveness = !_audioSourceActiveness;
+        _audioDisabled = !_audioDisabled;
         EnableAudioSource();
     }
     public void CloseOptionsPanel()
@@ -39,9 +38,6 @@ public class OptionsPanelController : MonoBehaviour
     }
     private void EnableAudioSource()
     {
-        foreach (var i in audioSource)
-        {
-           i.enabled = _audioSourceActiveness;
-        }
+        AudioListener.pause = _audioDisabled;
     }
 }

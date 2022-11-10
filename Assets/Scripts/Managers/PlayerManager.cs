@@ -106,6 +106,5 @@ namespace Managers
             wallDeactivatorCollider.enabled = false;
             transform.position = new Vector3(0, 0, 10);
         }
-
     }
 }

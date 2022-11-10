@@ -34,7 +34,6 @@ namespace Managers
             UISignals.Instance.onSetChangedText += levelPanelController.OnScoreUpdateText;
             CoreGameSignals.Instance.onPlay += OnPlay;
             CoreGameSignals.Instance.onLevelFailed += OnLevelFailed;
-            CoreGameSignals.Instance.onLevelSuccessful += OnLevelSuccessful;
             CoreGameSignals.Instance.onRestartLevel += levelPanelController.OnRestartLevel;
             ScoreSignals.Instance.onScoreIncrease += levelPanelController.OnScoreUpdateText;
             ScoreSignals.Instance.onHighScore += highScorePanelController.UpdateText;
@@ -49,7 +48,6 @@ namespace Managers
             CoreGameSignals.Instance.onPlay -= OnPlay;
             UISignals.Instance.onSetChangedText -= levelPanelController.OnScoreUpdateText;
             CoreGameSignals.Instance.onLevelFailed -= OnLevelFailed;
-            CoreGameSignals.Instance.onLevelSuccessful -= OnLevelSuccessful;
             CoreGameSignals.Instance.onRestartLevel -= levelPanelController.OnRestartLevel;
             ScoreSignals.Instance.onScoreIncrease -= levelPanelController.OnScoreUpdateText;
             ScoreSignals.Instance.onHighScore -= highScorePanelController.UpdateText;
@@ -86,12 +84,6 @@ namespace Managers
             UISignals.Instance.onClosePanel?.Invoke(UIPanels.LevelPanel);
             UISignals.Instance.onOpenPanel?.Invoke(UIPanels.GameOverPanel);
             gameOverPanelController.ShowThePanel();
-        }
-
-        private void OnLevelSuccessful()
-        {
-            UISignals.Instance.onClosePanel?.Invoke(UIPanels.LevelPanel);
-            UISignals.Instance.onOpenPanel?.Invoke(UIPanels.WinPanel);
         }
 
         public void Play()
