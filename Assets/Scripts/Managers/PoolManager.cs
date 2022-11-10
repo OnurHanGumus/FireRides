@@ -13,21 +13,12 @@ public class PoolManager : MonoBehaviour
     #region Serialized Variables
 
     [SerializeField] private List<GameObject> wallPrefabs;
-
-
-
     [SerializeField] private List<GameObject> wallDarkPool;
     [SerializeField] private List<GameObject> wallLightPool;
-
-
-
     [SerializeField] private int amountWallToPool = 50;
-
-
 
     #endregion
     #region Private Variables
-    private int _levelId = 0;
     private WallData _data;
     #endregion
     #endregion
@@ -39,7 +30,6 @@ public class PoolManager : MonoBehaviour
     }
     private void Init()
     {
-        _levelId = LevelSignals.Instance.onGetCurrentModdedLevel();
         _data = GetData();
         InitializeWallPool();
     }
@@ -87,13 +77,14 @@ public class PoolManager : MonoBehaviour
         {
             tmp = Instantiate(wallPrefabs[0], transform);
             tmp1 = Instantiate(wallPrefabs[1], transform);
-            tmp.transform.position = new Vector3(0, Random.Range(_data.Y_MinRandomPos, _data.Y_MaxRandomPos), (2*i+1)*2);
+            tmp.transform.position = new Vector3(0, Random.Range(_data.Y_MinRandomPos, _data.Y_MaxRandomPos), (2 * i + 1) * 2);
             tmp1.transform.position = new Vector3(0, Random.Range(_data.Y_MinRandomPos, _data.Y_MaxRandomPos), (i * 4));
 
             wallLightPool.Add(tmp);
             wallDarkPool.Add(tmp1);
         }
     }
+
     public GameObject OnGetDarkWall()
     {
  

@@ -24,13 +24,14 @@ namespace Managers
         #region Serialized Variables
 
         [SerializeField] private int colorTurn = 0;
-        [SerializeField] private int lastWallZPos = 98;
         #endregion
 
         #region Private Variables
         private bool _isReset = false;
         private WallData _data;
         private int _defaultStartPos = 0;
+        private int _lastWallZPos = 0;
+
         #endregion
 
         #endregion
@@ -48,8 +49,8 @@ namespace Managers
         private void Init()
         {
             _data = GetData();
-            lastWallZPos = (((PoolSignals.Instance.onGetAmount()-1)*2+1)*2);
-            _defaultStartPos = lastWallZPos;
+            _lastWallZPos = _data.LastWallXPos;
+            _defaultStartPos = _lastWallZPos;
         }
 
         private void OnEnable()
@@ -63,8 +64,6 @@ namespace Managers
             CoreGameSignals.Instance.onRestartLevel += OnReset;
             CoreGameSignals.Instance.onPlay += OnPlay;
         }
-
-
 
         private void UnsubscribeEvents()
         {
@@ -91,7 +90,6 @@ namespace Managers
             {
                 wall = PoolSignals.Instance.onGetLightWallFromPool();
                 colorTurn++;
-
             }
             else
             {
@@ -102,9 +100,9 @@ namespace Managers
             {
                 return;
             }
-            lastWallZPos += 2;
+            _lastWallZPos += _data.WallZAxisLenght;
 
-            wall.transform.position = new Vector3(0, UnityEngine.Random.Range(_data.Y_MinRandomPos, _data.Y_MaxRandomPos), lastWallZPos);
+            wall.transform.position = new Vector3(0, UnityEngine.Random.Range(_data.Y_MinRandomPos, _data.Y_MaxRandomPos), _lastWallZPos);
             wall.SetActive(true);
         }
 
@@ -115,7 +113,7 @@ namespace Managers
         private void OnReset()
         {
             _isReset = true;
-            lastWallZPos = _defaultStartPos;
+            _lastWallZPos = _defaultStartPos;
         }
     }
 }

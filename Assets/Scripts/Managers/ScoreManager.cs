@@ -27,26 +27,7 @@ namespace Managers
         #endregion
 
         #region Private Variables
-        private int _money = 0;
-        private int _gem = 0;
         private int _score = 0;
-
-        [ShowInInspector]
-        public int Money
-        {
-            get { return _money; }
-            set
-            {
-                _money = value;
-
-            }
-        }
-        [ShowInInspector]
-        public int Gem
-        {
-            get { return _gem; }
-            set { _gem = value; }
-        }
 
         [ShowInInspector]
         public int Score
@@ -80,7 +61,6 @@ namespace Managers
             ScoreSignals.Instance.onScoreIncrease += OnScoreIncrease;
             ScoreSignals.Instance.onScoreDecrease += OnScoreDecrease;
             ScoreSignals.Instance.onGetScore += OnGetScore;
-
             CoreGameSignals.Instance.onPlay += OnPlay;
             CoreGameSignals.Instance.onRestartLevel += OnReset;
         }
@@ -90,7 +70,6 @@ namespace Managers
             ScoreSignals.Instance.onScoreIncrease -= OnScoreIncrease;
             ScoreSignals.Instance.onScoreDecrease -= OnScoreDecrease;
             ScoreSignals.Instance.onGetScore -= OnGetScore;
-
             CoreGameSignals.Instance.onPlay -= OnPlay;
             CoreGameSignals.Instance.onRestartLevel -= OnReset;
         }
@@ -104,12 +83,7 @@ namespace Managers
 
         private void OnScoreIncrease(ScoreTypeEnums type, int amount)
         {
-            if (type.Equals(ScoreTypeEnums.Money))
-            {
-                _money += amount;
-                UISignals.Instance.onSetChangedText?.Invoke(type, _money);
-            }
-            else
+            if (type.Equals(ScoreTypeEnums.Score))
             {
                 _score += amount;
                 UISignals.Instance.onSetChangedText?.Invoke(type, _score);
@@ -118,21 +92,7 @@ namespace Managers
 
         private void OnScoreDecrease(ScoreTypeEnums type, int amount)
         {
-            if (type.Equals(ScoreTypeEnums.Money))
-            {
-                _money -= amount;
-                UISignals.Instance.onSetChangedText?.Invoke(type, _money);
-            }
-        }
 
-        private int OnGetMoney()
-        {
-            return Money;
-        }
-
-        private int OnGetGem()
-        {
-            return Gem;
         }
 
         private int OnGetScore()

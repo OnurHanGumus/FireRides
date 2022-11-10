@@ -10,10 +10,7 @@ namespace Signals
     {
         public Func<GameObject> onGetDarkWallFromPool = delegate { return null; };
         public Func<GameObject> onGetLightWallFromPool = delegate { return null; };
-
-
         public Func<Transform> onGetPoolManagerObj = delegate { return null; };
-
         public Func<int> onGetAmount = delegate { return 0; };
 
         public UnityAction onPoolReseted = delegate { };

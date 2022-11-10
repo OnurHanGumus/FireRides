@@ -9,6 +9,5 @@ namespace Signals
     public class AudioSignals : MonoSingleton<AudioSignals>
     {
         public UnityAction<SoundEnums> onPlaySound = delegate { };
-
     }
 }
