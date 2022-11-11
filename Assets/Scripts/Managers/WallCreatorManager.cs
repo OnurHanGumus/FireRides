@@ -50,7 +50,7 @@ namespace Managers
         private void Init()
         {
             _data = GetData();
-            _lastWallZPos = _data.WallZAxisLenght * _poolWallCount - _data.WallZAxisLenght *2;
+            _lastWallZPos = _data.WallZAxisLenght * _poolWallCount - (_data.WallZAxisLenght * 2);
             _defaultStartPos = _lastWallZPos;
         }
 

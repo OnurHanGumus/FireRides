@@ -22,7 +22,7 @@ public class GrappingHookManager: MonoBehaviour
     #endregion
 
     #region Private Variables
-    private LineRenderer _lr;
+    private LineRenderer _lr;//adlandýr
 
     private bool _isGrapping = false;
     private GraplingData _data;

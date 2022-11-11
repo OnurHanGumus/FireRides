@@ -8,5 +8,7 @@ namespace Enums
         Score,
         //Options
         SoundState,
+        //Store
+        TargetId,
     }
 }

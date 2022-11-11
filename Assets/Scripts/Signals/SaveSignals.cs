@@ -14,5 +14,6 @@ namespace Signals
         public UnityAction<int, SaveLoadStates, SaveFiles> onChangeSoundState = delegate { };
         public Func<SaveLoadStates,SaveFiles,int> onGetScore = delegate { return 0; };
         public Func<SaveLoadStates,SaveFiles,int> onGetSoundState = delegate { return 0; };
+        public Func<SaveLoadStates,SaveFiles,int> onGetSelectedTargetId = delegate { return 0; };
     }
 }

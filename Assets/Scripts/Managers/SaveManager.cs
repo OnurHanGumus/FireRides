@@ -42,6 +42,7 @@ namespace Managers
             SaveSignals.Instance.onChangeSoundState += OnSaveData;
             SaveSignals.Instance.onGetScore += OnGetData;
             SaveSignals.Instance.onGetSoundState += OnGetData;
+            SaveSignals.Instance.onGetSelectedTargetId += OnGetData;
         }
 
         private void UnsubscribeEvents()
@@ -50,6 +51,7 @@ namespace Managers
             SaveSignals.Instance.onChangeSoundState -= OnSaveData;
             SaveSignals.Instance.onGetScore -= OnGetData;
             SaveSignals.Instance.onGetSoundState -= OnGetData;
+            SaveSignals.Instance.onGetSelectedTargetId -= OnGetData;
         }
 
         private void OnDisable()
