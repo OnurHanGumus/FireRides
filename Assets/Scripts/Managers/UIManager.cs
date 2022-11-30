@@ -15,6 +15,7 @@ namespace Managers
         [SerializeField] private GameOverPanelController gameOverPanelController;
         [SerializeField] private LevelPanelController levelPanelController;
         [SerializeField] private HighScorePanelController highScorePanelController;
+        [SerializeField] private CollectablePanelController collectablePanelController;
 
         #endregion
 
@@ -32,6 +33,7 @@ namespace Managers
             UISignals.Instance.onOpenPanel += OnOpenPanel;
             UISignals.Instance.onClosePanel += OnClosePanel;
             UISignals.Instance.onSetChangedText += levelPanelController.OnScoreUpdateText;
+            UISignals.Instance.onSetChangedText += collectablePanelController.OnMoneyIncreased;
             CoreGameSignals.Instance.onPlay += OnPlay;
             CoreGameSignals.Instance.onLevelFailed += OnLevelFailed;
             CoreGameSignals.Instance.onRestartLevel += levelPanelController.OnRestartLevel;
@@ -45,8 +47,9 @@ namespace Managers
         {
             UISignals.Instance.onOpenPanel -= OnOpenPanel;
             UISignals.Instance.onClosePanel -= OnClosePanel;
-            CoreGameSignals.Instance.onPlay -= OnPlay;
             UISignals.Instance.onSetChangedText -= levelPanelController.OnScoreUpdateText;
+            UISignals.Instance.onSetChangedText -= collectablePanelController.OnMoneyIncreased;
+            CoreGameSignals.Instance.onPlay -= OnPlay;
             CoreGameSignals.Instance.onLevelFailed -= OnLevelFailed;
             CoreGameSignals.Instance.onRestartLevel -= levelPanelController.OnRestartLevel;
             ScoreSignals.Instance.onScoreIncrease -= levelPanelController.OnScoreUpdateText;
@@ -83,6 +86,8 @@ namespace Managers
         {
             UISignals.Instance.onClosePanel?.Invoke(UIPanels.LevelPanel);
             UISignals.Instance.onOpenPanel?.Invoke(UIPanels.GameOverPanel);
+            UISignals.Instance.onOpenPanel?.Invoke(UIPanels.CollectablePanel);
+
             gameOverPanelController.ShowThePanel();
         }
 
@@ -103,6 +108,8 @@ namespace Managers
             CoreGameSignals.Instance.onRestartLevel?.Invoke();
             UISignals.Instance.onClosePanel?.Invoke(UIPanels.FailPanel);
             UISignals.Instance.onOpenPanel?.Invoke(UIPanels.StartPanel);
+            UISignals.Instance.onClosePanel?.Invoke(UIPanels.CollectablePanel);
+
         }
 
         public void PauseButton()
@@ -124,6 +131,7 @@ namespace Managers
         {
             UISignals.Instance.onOpenPanel?.Invoke(UIPanels.StorePanel);
             UISignals.Instance.onClosePanel?.Invoke(UIPanels.StartPanel);
+            UISignals.Instance.onOpenPanel?.Invoke(UIPanels.CollectablePanel);
         }
     }
 }

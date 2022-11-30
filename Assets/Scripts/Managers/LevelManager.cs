@@ -68,7 +68,8 @@ namespace Managers
             CoreGameSignals.Instance.onNextLevel += OnNextLevel;
             CoreGameSignals.Instance.onRestartLevel += OnRestartLevel;
             CoreGameSignals.Instance.onGetLevelID += OnGetLevelID;
-            CoreGameSignals.Instance.onLevelFailed += OnPlayerDie;
+            CoreGameSignals.Instance.onLevelFailed += OnRestart;
+            CoreGameSignals.Instance.onPlay += OnPlay;
 
             LevelSignals.Instance.onGetTotalLevelCount += OnGetTotalLevelCount;
             PoolSignals.Instance.onInitializeAmountOfPool += OnInitializePools;
@@ -81,10 +82,11 @@ namespace Managers
             CoreGameSignals.Instance.onNextLevel -= OnNextLevel;
             CoreGameSignals.Instance.onRestartLevel -= OnRestartLevel;
             CoreGameSignals.Instance.onGetLevelID -= OnGetLevelID;
-            CoreGameSignals.Instance.onLevelFailed -= OnPlayerDie;
+            CoreGameSignals.Instance.onLevelFailed -= OnRestart;
 
             LevelSignals.Instance.onGetTotalLevelCount -= OnGetTotalLevelCount;
             PoolSignals.Instance.onInitializeAmountOfPool -= OnInitializePools;
+            CoreGameSignals.Instance.onPlay -= OnPlay;
         }
 
         private void OnDisable()
@@ -96,7 +98,6 @@ namespace Managers
 
         private void Start()
         {
-            OnInitializeLevel();
         }
 
         private void OnNextLevel()
@@ -110,7 +111,8 @@ namespace Managers
         private void OnRestartLevel()
         {
             CoreGameSignals.Instance.onClearActiveLevel?.Invoke();
-            CoreGameSignals.Instance.onLevelInitialize?.Invoke();
+            _levelID = 0;
+
         }
 
         private int OnGetLevelID()
@@ -130,9 +132,8 @@ namespace Managers
             levelClearer.ClearActiveLevel(levelHolder.transform);
         }
 
-        private void OnPlayerDie()
+        private void OnRestart()
         {
-            _levelID = 0;
         }
 
         private int OnGetTotalLevelCount()
@@ -143,6 +144,10 @@ namespace Managers
         private void OnInitializePools(int amount)
         {
             _poolObjectCount = amount;
+        }
+        private void OnPlay()
+        {
+            OnInitializeLevel();
         }
     }
 }

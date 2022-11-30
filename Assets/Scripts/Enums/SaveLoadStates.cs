@@ -6,9 +6,11 @@ namespace Enums
     public enum SaveLoadStates
     {
         Score,
+        Money,
         //Options
         SoundState,
         //Store
         TargetId,
+        BuyedItemList,
     }
 }

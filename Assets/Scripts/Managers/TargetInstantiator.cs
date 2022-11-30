@@ -70,12 +70,11 @@ namespace Managers
         {
             _targetId = SaveSignals.Instance.onGetSelectedTargetId(SaveLoadStates.TargetId, SaveFiles.SaveFile);
             prefab = (GameObject) Resources.Load("Prefabs/Targets/"+ _targetId.ToString());
-            Debug.Log("Prefabs/Targets/" + _targetId.ToString());
         }
 
         private void CreateTarget()
         {
-            Instantiate(prefab, transform.position, Quaternion.identity);
+            Instantiate(prefab, transform.position, Quaternion.identity, transform);
         }
     }
 }

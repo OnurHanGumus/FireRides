@@ -38,7 +38,10 @@ public class LevelPanelController : MonoBehaviour
 
     public void OnScoreUpdateText(ScoreTypeEnums type, int score)
     {
-        scoreTxt.text = score.ToString();
+        if (type.Equals(ScoreTypeEnums.Score))
+        {
+            scoreTxt.text = score.ToString();
+        }
     }
 
     public void OnHitTarget(int value)
